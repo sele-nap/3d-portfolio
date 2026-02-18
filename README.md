@@ -1,4 +1,4 @@
- # 3D Portfolio
+ # 3D Portfolio — Séléna Poun
 
 Personal portfolio built with React, TypeScript and Three.js.
 

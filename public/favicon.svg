@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D41E2C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFC72C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Forme de piment stylisée -->
+  <path d="M 50 20 Q 60 25 60 35 L 58 60 Q 58 75 50 85 Q 42 75 42 60 L 40 35 Q 40 25 50 20 Z"
+        fill="url(#grad)"
+        stroke="#1a1a1a"
+        stroke-width="2"/>
+
+  <!-- Tige -->
+  <rect x="47" y="10" width="6" height="12" rx="2" fill="#4A7C3B"/>
+  <circle cx="50" cy="10" r="4" fill="#5A8C4B"/>
+</svg>
