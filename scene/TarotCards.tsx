@@ -1091,10 +1091,12 @@ export function TarotCards({ activeSection, onCardSelect }: TarotCardsProps) {
 
     // Scale responsive selon orientation
     const s = portrait
-      ? (size.width < 480 ? 0.82 : size.width < 768 ? 0.92 : 1.0)
+      ? (size.width < 380 ? 0.84 : size.width < 480 ? 0.92 : size.width < 768 ? 0.88 : 0.84)
       : (size.width < 380 ? 0.50 : size.width < 480 ? 0.62
           : size.width < 680 ? 0.80 : size.width < 900 ? 0.95 : 1.05)
     sceneGroupRef.current.scale.setScalar(s)
+    // Décale légèrement vers le bas en portrait (header > footer)
+    sceneGroupRef.current.position.y = portrait ? -0.3 : 0
   })
 
   return (
