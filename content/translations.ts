@@ -243,7 +243,7 @@ export const translations = {
 
     contact: {
       title: 'Contact',
-      description: 'Would you like to collaborate or know more about my work, please feel free to reach out to me. 🐸',
+      description: 'If you would like to collaborate or learn more about my work, please feel free to contact me. 🐸',
       email: 'selena.poun@gmail.com',
       github: 'sele-nap',
       githubUrl: 'https://github.com/sele-nap',
