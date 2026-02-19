@@ -115,7 +115,7 @@ export const translations = {
 
     contact: {
       title: 'Contact',
-      description: "Si vous souhaitez collaborer ou en savoir plus sur mon travail ? N'hésitez pas à me contacter. 🐸",
+      description: "Si vous souhaitez collaborer ou en savoir plus sur mon travail, n'hésitez pas à me contacter. 🐸",
       email: 'selena.poun@gmail.com',
       github: 'sele-nap',
       githubUrl: 'https://github.com/sele-nap',
@@ -243,7 +243,7 @@ export const translations = {
 
     contact: {
       title: 'Contact',
-      description: 'Would you like to collaborate or know more about my work? Please feel free to reach out to me. 🐸',
+      description: 'Would you like to collaborate or know more about my work, please feel free to reach out to me. 🐸',
       email: 'selena.poun@gmail.com',
       github: 'sele-nap',
       githubUrl: 'https://github.com/sele-nap',
