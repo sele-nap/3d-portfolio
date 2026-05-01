@@ -1,4 +1,4 @@
-export type Language = 'fr' | 'en'
+export type Language = 'fr' | 'en';
 
 export const translations = {
   fr: {
@@ -9,52 +9,82 @@ export const translations = {
 
     about: {
       title: 'À propos',
-      intro: "Développeuse full-stack spécialisée en JavaScript et TypeScript, avec une expérience en applications web, mobile et outils 3D interactifs. Attachée à la performance, à l'UX et à la qualité du code.",
+      intro:
+        "Développeuse full-stack spécialisée en JavaScript et TypeScript, avec une expérience en applications web, mobile et outils 3D interactifs. Attachée à la performance, à l'UX et à la qualité du code.",
       skills: {
         atouts: {
           title: 'Atouts',
-          items: ['Autonomie', 'Rigueur', 'Capacité d\'adaptation', 'Esprit d\'équipe']
+          items: [
+            'Autonomie',
+            'Rigueur',
+            "Capacité d'adaptation",
+            "Esprit d'équipe",
+          ],
         },
         tech: {
           title: 'Informatique',
-          items: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React (Redux, Hooks)', 'Vue.js', 'Three.js', 'Node.js', 'MongoDB', 'MySQL', 'REST API', 'Git', 'Shell script', 'Agile / SCRUM', 'Figma', 'Suite Adobe (Illustrator, InDesign, Premiere Pro)']
+          items: [
+            'HTML',
+            'CSS',
+            'JavaScript',
+            'TypeScript',
+            'React (Redux, Hooks)',
+            'Vue.js',
+            'Three.js',
+            'Node.js',
+            'MongoDB',
+            'MySQL',
+            'REST API',
+            'Git',
+            'Shell script',
+            'Agile / SCRUM',
+            'Figma',
+            'Suite Adobe (Illustrator, InDesign, Premiere Pro)',
+          ],
         },
         competences: {
           title: 'Compétences',
-          items: ['Analyse de besoins utilisateur·trices', 'Méthodologie Agile', 'Amélioration continue', 'Veille technologique']
+          items: [
+            'Analyse de besoins utilisateur·trices',
+            'Méthodologie Agile',
+            'Amélioration continue',
+            'Veille technologique',
+          ],
         },
         interests: {
-          title: 'Centres d\'intérêt',
-          items: ['Gaming', 'Marche', 'Lecture']
-        }
-      }
+          title: "Centres d'intérêt",
+          items: ['Gaming', 'Marche', 'Lecture'],
+        },
+      },
     },
 
     formations: {
       title: 'Formations',
-      description: 'Un parcours à la croisée du design, de la technique et de la narration numérique.',
+      description:
+        'Un parcours à la croisée du design, de la technique et de la narration numérique.',
       degrees: [
         {
-          title: 'Conceptrice / Développeuse d\'Applications',
+          title: "Conceptrice / Développeuse d'Applications",
           period: '2021 – 2023',
           school: 'Wild Code School',
           location: 'Lyon, France',
           highlights: [
             'Spécialisation en JavaScript, TypeScript, Node.js, React',
             'Réalisation de projets en méthodologies Agile et workflows collaboratifs',
-            'Développement d\'APIs REST et d\'interfaces responsives',
-          ]
+            "Développement d'APIs REST et d'interfaces responsives",
+          ],
         },
         {
-          title: 'Master Création Numérique · Hypermédias & Espaces Intelligents',
+          title:
+            'Master Création Numérique · Hypermédias & Espaces Intelligents',
           period: '2017 – 2020',
           school: 'Université Savoie Mont Blanc',
           location: 'Chambéry, France',
           highlights: [
             'Conception de systèmes interactifs en réalité augmentée et réalité virtuelle avec Unity',
             'UX/UI design, création de contenus interactifs, storytelling transmedia',
-            'Mémoire : « Le rôle de l\'image dans l\'exploitation animale : les perceptions issues des manifestations de L214 contre l\'exploitation animale. »',
-          ]
+            "Mémoire : « Le rôle de l'image dans l'exploitation animale : les perceptions issues des manifestations de L214 contre l'exploitation animale. »",
+          ],
         },
         {
           title: 'Licence Métiers du Livre et du Multimédia',
@@ -64,32 +94,33 @@ export const translations = {
           highlights: [
             'Formation aux outils numériques (HTML/CSS, Adobe Suite), à la communication et à la gestion de projets culturels',
             'Spécialisation dans la production de médias numériques, la médiation culturelle et le contenu éditorial',
-            'Cours d\'anglais avancé et communication numérique',
-          ]
-        }
+            "Cours d'anglais avancé et communication numérique",
+          ],
+        },
       ],
       cv: {
         label: 'Télécharger mon CV',
-        fileName: '/CV_Poun_Selena_fr.pdf'
-      }
+        fileName: '/CV_Poun_Selena_fr.pdf',
+      },
     },
 
     experiences: {
       title: 'Expériences',
-      description: 'Un parcours à la croisée du web, de la 3D et de l\'innovation.',
+      description:
+        "Un parcours à la croisée du web, de la 3D et de l'innovation.",
       jobs: [
         {
           title: 'Développeuse Full-Stack orientée Frontend',
-          period: 'Avril 2026 – aujourd\'hui',
+          period: "Avril 2026 – aujourd'hui",
           company: 'Gedeon',
           location: 'Lyon, France',
           highlights: [
-            'Développement d\'interfaces accessibles et performantes (React, Next.js) alignées sur le design system',
-            'Intégration d\'APIs REST via SWR et développement de services backend (Express.js, Lambda AWS)',
+            "Développement d'interfaces accessibles et performantes (React, Next.js) alignées sur le design system",
+            "Intégration d'APIs REST via SWR et développement de services backend (Express.js, Lambda AWS)",
             'Manipulation de données avec Mongoose / MongoDB',
-            'Contribution à l\'architecture orientée services et montée en compétence sur AWS (Lambda, S3, CloudWatch)',
-            'Tests unitaires et d\'intégration, revues de code et respect des conventions d\'équipe',
-          ]
+            "Contribution à l'architecture orientée services et montée en compétence sur AWS (Lambda, S3, CloudWatch)",
+            "Tests unitaires et d'intégration, revues de code et respect des conventions d'équipe",
+          ],
         },
         {
           title: 'Développeuse Full-Stack 3D',
@@ -97,12 +128,12 @@ export const translations = {
           company: 'Decq',
           location: 'Saint-Priest, France',
           highlights: [
-            'Développement d\'un configurateur 3D en ligne en Vue.js, Three.js, TypeScript et PHP',
+            "Développement d'un configurateur 3D en ligne en Vue.js, Three.js, TypeScript et PHP",
             'Conception de composants interactifs et rendu 3D temps réel',
-            'Optimisation de l\'UX et refonte modulaire du code en lien avec l\'équipe design',
-            'Mise en production de l\'outil, utilisé par plusieurs clients industriels',
-            'Réalisation majeure : livrable final mis en production, conçu de A à Z avec une architecture front/back maintenable.'
-          ]
+            "Optimisation de l'UX et refonte modulaire du code en lien avec l'équipe design",
+            "Mise en production de l'outil, utilisé par plusieurs clients industriels",
+            'Réalisation majeure : livrable final mis en production, conçu de A à Z avec une architecture front/back maintenable.',
+          ],
         },
         {
           title: 'Chargée Marketing Digital',
@@ -112,7 +143,7 @@ export const translations = {
           highlights: [
             'Stratégie marketing & communication pour un studio de jeux vidéo indie',
             'Animation des réseaux sociaux, campagne de financement participatif et développement transmédia',
-          ]
+          ],
         },
         {
           title: 'Business Developer',
@@ -122,7 +153,7 @@ export const translations = {
           highlights: [
             'Prospection téléphonique et création de supports marketing',
             'Contribution à la stratégie de communication',
-          ]
+          ],
         },
         {
           title: 'Conceptrice en Réalité Virtuelle',
@@ -130,8 +161,8 @@ export const translations = {
           company: 'Université Savoie Mont Blanc',
           location: 'Chambéry, France',
           highlights: [
-            'Réalisation d\'un prototype VR sous Unity (C#) pour un projet de thèse',
-          ]
+            "Réalisation d'un prototype VR sous Unity (C#) pour un projet de thèse",
+          ],
         },
         {
           title: 'Assistante Éditoriale & Communication',
@@ -142,37 +173,50 @@ export const translations = {
             'Gestion du service de presse',
             'Création de supports visuels pour les salons du livre (kakemonos, bons de commande)',
             'Participation aux ventes',
-          ]
-        }
-      ]
+          ],
+        },
+      ],
     },
 
     projects: {
       title: 'Projets',
-      description: 'Une sélection de réalisations concrètes, de la conception à la mise en production.',
+      description:
+        'Une sélection de réalisations concrètes, de la conception à la mise en production.',
+      linkLabel: 'Voir le site',
       items: [
         {
           title: 'Plan Épargne Retraite',
-          period: 'Avril 2026 – aujourd\'hui',
+          period: "Avril 2026 – aujourd'hui",
           company: 'Gedeon',
-          description: 'Plateforme fintech dédiée à la gestion des Plans d\'Épargne Retraite (PER), à destination des particuliers, des entreprises et des courtiers. L\'outil offre une vision à 360° de la retraite en agrégeant informations de retraite publique et épargne personnelle, avec simulateurs de taux de remplacement et projections de revenus.',
-          tech: ['React', 'Next.js', 'TypeScript', 'Express.js', 'SWR', 'MongoDB', 'AWS'],
+          description:
+            "Plateforme fintech dédiée à la gestion des Plans d'Épargne Retraite (PER), à destination des particuliers, des entreprises et des courtiers. L'outil offre une vision à 360° de la retraite en agrégeant informations de retraite publique et épargne personnelle, avec simulateurs de taux de remplacement et projections de revenus.",
+          tech: [
+            'React',
+            'Next.js',
+            'TypeScript',
+            'Express.js',
+            'SWR',
+            'MongoDB',
+            'AWS',
+          ],
           link: 'https://gedeon.io/',
         },
         {
           title: 'Configurateur 3D',
           period: '2022 – 2025',
           company: 'Decq',
-          description: 'Outil de configuration 3D en ligne permettant aux client·es industriels et particuliers de personnaliser leurs produits en temps réel. Conçu de A à Z avec une architecture front/back maintenable et mis en production.',
+          description:
+            'Outil de configuration 3D en ligne permettant aux client·es industriels et particuliers de personnaliser leurs produits en temps réel. Conçu de A à Z avec une architecture front/back maintenable et mis en production.',
           tech: ['Vue.js', 'Three.js', 'TypeScript', 'PHP'],
           video: '/Config3D.mp4',
-        }
-      ]
+        },
+      ],
     },
 
     contact: {
       title: 'Contact',
-      description: "Si vous souhaitez collaborer ou en savoir plus sur mon travail, n'hésitez pas à me contacter. 🐸",
+      description:
+        "Si vous souhaitez collaborer ou en savoir plus sur mon travail, n'hésitez pas à me contacter. 🐸",
       email: 'selena.poun@gmail.com',
       github: 'sele-nap',
       githubUrl: 'https://github.com/sele-nap',
@@ -182,8 +226,8 @@ export const translations = {
 
     footer: {
       made: 'Fait avec 🐈‍⬛ et magie',
-      tech: 'React • Three.js'
-    }
+      tech: 'React • Three.js',
+    },
   },
 
   en: {
@@ -194,30 +238,59 @@ export const translations = {
 
     about: {
       title: 'About',
-      intro: "Full-stack developer specializing in JavaScript and TypeScript, with a background in web, mobile, and interactive 3D applications. Driven by performance, clean UX, and maintainable code.",
+      intro:
+        'Full-stack developer specializing in JavaScript and TypeScript, with a background in web, mobile, and interactive 3D applications. Driven by performance, clean UX, and maintainable code.',
       skills: {
         atouts: {
           title: 'Strengths',
-          items: ['Autonomy', 'Attention to detail', 'Adaptability', 'Team spirit']
+          items: [
+            'Autonomy',
+            'Attention to detail',
+            'Adaptability',
+            'Team spirit',
+          ],
         },
         tech: {
           title: 'Technical',
-          items: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React (Redux, Hooks)', 'Vue.js', 'Three.js', 'Node.js', 'MongoDB', 'MySQL', 'REST API', 'Git', 'Shell script', 'Agile / SCRUM', 'Figma', 'Adobe Suite (Illustrator, InDesign, Premiere Pro)']
+          items: [
+            'HTML',
+            'CSS',
+            'JavaScript',
+            'TypeScript',
+            'React (Redux, Hooks)',
+            'Vue.js',
+            'Three.js',
+            'Node.js',
+            'MongoDB',
+            'MySQL',
+            'REST API',
+            'Git',
+            'Shell script',
+            'Agile / SCRUM',
+            'Figma',
+            'Adobe Suite (Illustrator, InDesign, Premiere Pro)',
+          ],
         },
         competences: {
           title: 'Skills',
-          items: ['User analysis', 'Agile methodology', 'Continuous improvement', 'IT monitoring']
+          items: [
+            'User analysis',
+            'Agile methodology',
+            'Continuous improvement',
+            'IT monitoring',
+          ],
         },
         interests: {
           title: 'Interests',
-          items: ['Gaming', 'Hiking', 'Reading']
-        }
-      }
+          items: ['Gaming', 'Hiking', 'Reading'],
+        },
+      },
     },
 
     formations: {
       title: 'Formations',
-      description: 'A path at the crossroads of design, technology and digital storytelling.',
+      description:
+        'A path at the crossroads of design, technology and digital storytelling.',
       degrees: [
         {
           title: 'Application Designer and Developer',
@@ -228,10 +301,11 @@ export const translations = {
             'Specialized in full-stack development with JavaScript, TypeScript, Node.js and React',
             'Completed multiple projects using Agile methodologies and collaborative workflows',
             'Built REST APIs and responsive front-end applications',
-          ]
+          ],
         },
         {
-          title: 'Master in Digital Design · Hypermedia and Intelligent Environment',
+          title:
+            'Master in Digital Design · Hypermedia and Intelligent Environment',
           period: '2017 – 2020',
           school: 'University of Savoy Mont Blanc',
           location: 'Chambéry, France',
@@ -239,7 +313,7 @@ export const translations = {
             'Designed and developed interactive digital systems in virtual and augmented reality using Unity',
             'Focused on UX/UI design, interactive content creation, and transmedia storytelling',
             "Master's thesis: 'The role of imagery in animal exploitation: Perceptions from L214 protests against animal exploitation.'",
-          ]
+          ],
         },
         {
           title: "Bachelor's Degree in Book & Multimedia Studies",
@@ -250,13 +324,13 @@ export const translations = {
             'Trained in digital tools (HTML/CSS, Adobe Suite), communication and cultural project design',
             'Focus on digital media production, heritage mediation, and editorial content',
             'Included class in advanced English and digital communication',
-          ]
-        }
+          ],
+        },
       ],
       cv: {
         label: 'Download my CV',
-        fileName: '/CV_Poun_Selena_en.pdf'
-      }
+        fileName: '/CV_Poun_Selena_en.pdf',
+      },
     },
 
     experiences: {
@@ -274,7 +348,7 @@ export const translations = {
             'Handling data with Mongoose / MongoDB',
             'Contributing to a service-oriented architecture and upskilling on AWS (Lambda, S3, CloudWatch)',
             'Unit and integration testing, code reviews and team conventions',
-          ]
+          ],
         },
         {
           title: 'Full-Stack 3D Developer',
@@ -287,7 +361,7 @@ export const translations = {
             'Improved UX and code scalability in close collaboration with the design team',
             'Delivered a stable, modular platform used by industrial clients',
             'Key achievement: final deliverable put into production, designed from start to finish with a maintainable front/back architecture',
-          ]
+          ],
         },
         {
           title: 'Digital Marketing Specialist',
@@ -297,7 +371,7 @@ export const translations = {
           highlights: [
             'Marketing & communication strategy for an indie video game studio',
             'Managed social media, crowdfunding campaign and transmedia development',
-          ]
+          ],
         },
         {
           title: 'Business Developer',
@@ -307,7 +381,7 @@ export const translations = {
           highlights: [
             'Led prospecting efforts and supported marketing visuals',
             'Contributed to outreach strategy and competitive analysis',
-          ]
+          ],
         },
         {
           title: 'Virtual Reality Designer',
@@ -316,7 +390,7 @@ export const translations = {
           location: 'Chambéry, France',
           highlights: [
             'Built a VR prototype in Unity (C#) for a PhD research project',
-          ]
+          ],
         },
         {
           title: 'Editorial & Communications Assistant',
@@ -327,37 +401,49 @@ export const translations = {
             'Managed press relations',
             'Created visual materials for book fairs (banners, order forms)',
             'Supported sales activities',
-          ]
-        }
-      ]
+          ],
+        },
+      ],
     },
 
     projects: {
       title: 'Projects',
       description: 'A selection of concrete work, from design to production.',
+      linkLabel: 'Visit website',
       items: [
         {
-          title: 'Plan Épargne Retraite',
+          title: 'Retirement Savings Plan',
           period: 'April 2026 – Present',
           company: 'Gedeon',
-          description: 'A fintech platform dedicated to managing Retirement Savings Plans (PERs), designed for individuals, businesses, and brokers. The tool provides a 360° view of retirement by combining information on public pensions and personal savings, along with replacement rate calculators and income projections.',
-          tech: ['React', 'Next.js', 'TypeScript', 'Express.js', 'SWR', 'MongoDB', 'AWS'],
+          description:
+            'A fintech platform dedicated to managing Retirement Savings Plans (PERs), designed for individuals, businesses, and brokers. The tool provides a 360° view of retirement by combining information on public pensions and personal savings, along with replacement rate calculators and income projections.',
+          tech: [
+            'React',
+            'Next.js',
+            'TypeScript',
+            'Express.js',
+            'SWR',
+            'MongoDB',
+            'AWS',
+          ],
           link: 'https://gedeon.io/',
         },
         {
           title: '3D Configurator',
           period: '2022 – 2025',
           company: 'Decq',
-          description: 'An online 3D configuration tool allowing industrial clients to customize their products in real time. Designed from scratch to finish with a maintainable front/back architecture and deployed to production.',
+          description:
+            'An online 3D configuration tool allowing industrial clients to customize their products in real time. Designed from scratch to finish with a maintainable front/back architecture and deployed to production.',
           tech: ['Vue.js', 'Three.js', 'TypeScript', 'PHP'],
           video: '/Config3D.mp4',
-        }
-      ]
+        },
+      ],
     },
 
     contact: {
       title: 'Contact',
-      description: 'If you would like to collaborate or learn more about my work, please feel free to contact me. 🐸',
+      description:
+        'If you would like to collaborate or learn more about my work, please feel free to contact me. 🐸',
       email: 'selena.poun@gmail.com',
       github: 'sele-nap',
       githubUrl: 'https://github.com/sele-nap',
@@ -367,9 +453,9 @@ export const translations = {
 
     footer: {
       made: 'Made with 🐈‍⬛ and magic',
-      tech: 'React • Three.js'
-    }
-  }
-} as const
+      tech: 'React • Three.js',
+    },
+  },
+} as const;
 
-export type TranslationKey = typeof translations.fr
+export type TranslationKey = typeof translations.fr;

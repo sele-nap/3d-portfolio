@@ -72,7 +72,6 @@
   overflow: hidden;
 }
 
-
 .modal-overlay.visible .modal-box {
   transform: scale(1) translateY(0);
 }
@@ -126,7 +125,16 @@
 .modal-accent-line {
   width: 3rem;
   height: 2px;
-  background: linear-gradient(90deg, #D52D00, #EF7627, #FF9A56, #FFFFFF, #D162A4, #B55690, #A50062);
+  background: linear-gradient(
+    90deg,
+    #d52d00,
+    #ef7627,
+    #ff9a56,
+    #ffffff,
+    #d162a4,
+    #b55690,
+    #a50062
+  );
   margin-bottom: 1.25rem;
   border-radius: 1px;
   opacity: 0.85;
