@@ -189,7 +189,7 @@ export const translations = {
           period: "Avril 2026 – aujourd'hui",
           company: 'Gedeon',
           description:
-            "Plateforme fintech dédiée à la gestion des Plans d'Épargne Retraite (PER), à destination des particuliers, des entreprises et des courtiers. L'outil offre une vision à 360° de la retraite en agrégeant informations de retraite publique et épargne personnelle, avec simulateurs de taux de remplacement et projections de revenus.",
+            "Plateforme fintech dédiée à la gestion des Plans d'Épargne Retraite (PER), à destination des particuliers, des entreprises et des courtier·es. L'outil offre une vision à 360° de la retraite en agrégeant informations de retraite publique et épargne personnelle, avec simulateurs de taux de remplacement et projections de revenus.",
           tech: [
             'React',
             'Next.js',
