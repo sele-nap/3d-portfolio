@@ -35,7 +35,7 @@ const CARD_CONFIGS = [
   { id: 'formations', symbol: '✦', accentColor: '#d4a574' },
   { id: 'experiences', symbol: '✵', accentColor: '#8099b8' },
   { id: 'contact', symbol: '✉', accentColor: '#7a9578' },
-  { id: 'projects', symbol: '⬡', accentColor: '#c4855a' },
+  { id: 'projects', symbol: '⬡', accentColor: '#9a6878' },
 ] as const;
 
 const CARD_ROMAN: Record<string, string> = {
