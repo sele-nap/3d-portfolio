@@ -70,6 +70,62 @@ const CARD_CONFIGS = [
   },
 ] as const;
 
+// Canvas dimensions shared by front and back textures
+const CARD_CANVAS_W = 512;
+const CARD_CANVAS_H = 896;
+
+// Outer glowing ring + optional inner echo ring — appears on every card illustration
+function drawOuterRing(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  color: string,
+  outerR: number,
+  innerR?: number,
+) {
+  ctx.save();
+  ctx.shadowColor = color;
+  ctx.shadowBlur = 28;
+  ctx.strokeStyle = `${color}aa`;
+  ctx.lineWidth = 2.2;
+  ctx.beginPath();
+  ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.restore();
+  if (innerR !== undefined) {
+    ctx.strokeStyle = `${color}66`;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(cx, cy, innerR, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+}
+
+// Dots evenly spaced around a circle — used as a constellation belt
+function drawConstellationDots(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  color: string,
+  radius: number,
+  stepDivisor: number,
+  baseAlpha: number,
+  alphaVariance: number,
+  sinFreq: number,
+  dotRadius: number,
+) {
+  for (let a = 0; a < Math.PI * 2; a += Math.PI / stepDivisor) {
+    const dx = cx + Math.cos(a) * radius;
+    const dy = cy + Math.sin(a) * radius;
+    ctx.fillStyle = color;
+    ctx.globalAlpha = baseAlpha + Math.sin(a * sinFreq) * alphaVariance;
+    ctx.beginPath();
+    ctx.arc(dx, dy, dotRadius, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+}
+
 function drawLeafShape(ctx: CanvasRenderingContext2D, size: number) {
   ctx.beginPath();
   ctx.moveTo(0, 0);
@@ -482,12 +538,13 @@ function drawOrnamentalCorner(
 }
 
 function createBackTexture(): THREE.CanvasTexture {
-  const W = 512,
-    H = 896;
+  const W = CARD_CANVAS_W;
+  const H = CARD_CANVAS_H;
   const canvas = document.createElement('canvas');
   canvas.width = W;
   canvas.height = H;
-  const ctx = canvas.getContext('2d')!;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) throw new Error('Canvas 2D context unavailable');
 
   const bg = ctx.createRadialGradient(W / 2, H * 0.42, 55, W / 2, H / 2, 460);
   bg.addColorStop(0, '#1e1430');
@@ -640,6 +697,11 @@ function createBackTexture(): THREE.CanvasTexture {
   return tex;
 }
 
+// Shared singleton — all cards use the same back design, no need for 5 copies
+let _sharedBackTexture: THREE.CanvasTexture | null = null;
+const getSharedBackTexture = (): THREE.CanvasTexture =>
+  (_sharedBackTexture ??= createBackTexture());
+
 function drawCardIllustration(
   ctx: CanvasRenderingContext2D,
   W: number,
@@ -650,30 +712,19 @@ function drawCardIllustration(
     cy = H * 0.375;
 
   if (card.id === 'about') {
-    ctx.save();
-    ctx.shadowColor = card.accentColor;
-    ctx.shadowBlur = 28;
-    ctx.strokeStyle = `${card.accentColor}aa`;
-    ctx.lineWidth = 2.2;
-    ctx.beginPath();
-    ctx.arc(cx, cy, 132, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.restore();
-    ctx.strokeStyle = `${card.accentColor}66`;
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.arc(cx, cy, 118, 0, Math.PI * 2);
-    ctx.stroke();
-    for (let a = 0; a < Math.PI * 2; a += Math.PI / 10) {
-      const dx = cx + Math.cos(a) * 142,
-        dy = cy + Math.sin(a) * 142;
-      ctx.fillStyle = card.accentColor;
-      ctx.globalAlpha = 0.2 + Math.sin(a * 4) * 0.1;
-      ctx.beginPath();
-      ctx.arc(dx, dy, 2.5, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.globalAlpha = 1;
-    }
+    drawOuterRing(ctx, cx, cy, card.accentColor, 132, 118);
+    drawConstellationDots(
+      ctx,
+      cx,
+      cy,
+      card.accentColor,
+      142,
+      10,
+      0.2,
+      0.1,
+      4,
+      2.5,
+    );
     ctx.save();
     ctx.shadowColor = card.accentColor;
     ctx.shadowBlur = 50;
@@ -744,31 +795,19 @@ function drawCardIllustration(
     drawCrystalCluster(ctx, cx + 138, cy - 88, card.accentColor, 0.72);
     ctx.restore();
   } else if (card.id === 'formations') {
-    ctx.save();
-    ctx.shadowColor = card.accentColor;
-    ctx.shadowBlur = 28;
-    ctx.strokeStyle = `${card.accentColor}aa`;
-    ctx.lineWidth = 2.2;
-    ctx.beginPath();
-    ctx.arc(cx, cy, 135, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.restore();
-    ctx.strokeStyle = `${card.accentColor}66`;
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.arc(cx, cy, 120, 0, Math.PI * 2);
-    ctx.stroke();
-
-    for (let a = 0; a < Math.PI * 2; a += Math.PI / 14) {
-      const dx = cx + Math.cos(a) * 128,
-        dy = cy + Math.sin(a) * 128;
-      ctx.fillStyle = card.accentColor;
-      ctx.globalAlpha = 0.14 + Math.sin(a * 3) * 0.07;
-      ctx.beginPath();
-      ctx.arc(dx, dy, 2, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
+    drawOuterRing(ctx, cx, cy, card.accentColor, 135, 120);
+    drawConstellationDots(
+      ctx,
+      cx,
+      cy,
+      card.accentColor,
+      128,
+      14,
+      0.14,
+      0.07,
+      3,
+      2,
+    );
 
     const hgHalfH = 86,
       hgHalfW = 56,
@@ -948,15 +987,7 @@ function drawCardIllustration(
     drawSprig(ctx, cx - 140, cy + 18, 0.25, card.accentColor, 1.05);
     ctx.restore();
   } else if (card.id === 'contact') {
-    ctx.save();
-    ctx.shadowColor = card.accentColor;
-    ctx.shadowBlur = 28;
-    ctx.strokeStyle = `${card.accentColor}aa`;
-    ctx.lineWidth = 2.2;
-    ctx.beginPath();
-    ctx.arc(cx, cy, 132, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.restore();
+    drawOuterRing(ctx, cx, cy, card.accentColor, 132);
 
     ctx.save();
     ctx.globalAlpha = 1.0;
@@ -1082,31 +1113,19 @@ function drawCardIllustration(
     drawMushroom(ctx, cx + 88, cy + 142, 16, '#5a9070');
     ctx.restore();
   } else if (card.id === 'experiences') {
-    ctx.save();
-    ctx.shadowColor = card.accentColor;
-    ctx.shadowBlur = 28;
-    ctx.strokeStyle = `${card.accentColor}aa`;
-    ctx.lineWidth = 2.2;
-    ctx.beginPath();
-    ctx.arc(cx, cy, 132, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.restore();
-    ctx.strokeStyle = `${card.accentColor}66`;
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.arc(cx, cy, 118, 0, Math.PI * 2);
-    ctx.stroke();
-
-    for (let a = 0; a < Math.PI * 2; a += Math.PI / 12) {
-      const dx = cx + Math.cos(a) * 126,
-        dy = cy + Math.sin(a) * 126;
-      ctx.fillStyle = card.accentColor;
-      ctx.globalAlpha = 0.15 + Math.sin(a * 4) * 0.08;
-      ctx.beginPath();
-      ctx.arc(dx, dy, 2, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
+    drawOuterRing(ctx, cx, cy, card.accentColor, 132, 118);
+    drawConstellationDots(
+      ctx,
+      cx,
+      cy,
+      card.accentColor,
+      126,
+      12,
+      0.15,
+      0.08,
+      4,
+      2,
+    );
 
     ctx.fillStyle = 'rgba(10, 14, 26, 0.85)';
     ctx.beginPath();
@@ -1253,16 +1272,7 @@ function drawCardIllustration(
       ctx.closePath();
     };
 
-    // Outer glowing ring
-    ctx.save();
-    ctx.shadowColor = card.accentColor;
-    ctx.shadowBlur = 28;
-    ctx.strokeStyle = `${card.accentColor}aa`;
-    ctx.lineWidth = 2.2;
-    ctx.beginPath();
-    ctx.arc(cx, cy, 132, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.restore();
+    drawOuterRing(ctx, cx, cy, card.accentColor, 132);
 
     // Large central hexagon
     ctx.save();
@@ -1384,12 +1394,13 @@ function drawCardIllustration(
 }
 
 function createFrontTexture(card: CardDef): THREE.CanvasTexture {
-  const W = 512,
-    H = 896;
+  const W = CARD_CANVAS_W;
+  const H = CARD_CANVAS_H;
   const canvas = document.createElement('canvas');
   canvas.width = W;
   canvas.height = H;
-  const ctx = canvas.getContext('2d')!;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) throw new Error('Canvas 2D context unavailable');
 
   const bg = ctx.createLinearGradient(0, 0, 0, H);
   if (card.id === 'about') {
@@ -1595,13 +1606,14 @@ function TarotCard({
   const dealClock = useRef(0);
   const settledBaseY = useRef(-8);
 
-  const backTexture = useMemo(() => createBackTexture(), []);
+  const backTexture = getSharedBackTexture();
   const frontTexture = useMemo(() => createFrontTexture(def), [def]);
   const glowTexture = useMemo(() => {
     const canvas = document.createElement('canvas');
     canvas.width = 256;
     canvas.height = 256;
-    const ctx2d = canvas.getContext('2d')!;
+    const ctx2d = canvas.getContext('2d');
+    if (!ctx2d) throw new Error('Canvas 2D context unavailable');
     const ratioX = 2.0 / 3.0;
     const ratioY = 3.3 / 4.6;
     const cw = 256 * ratioX;
@@ -1623,11 +1635,10 @@ function TarotCard({
   useEffect(() => {
     return () => {
       frontTexture.dispose();
-      backTexture.dispose();
       glowTexture.dispose();
       document.body.style.cursor = 'auto';
     };
-  }, [frontTexture, backTexture, glowTexture]);
+  }, [frontTexture, glowTexture]);
 
   const handleClick = useCallback(
     (e: ThreeEvent<MouseEvent>) => {
