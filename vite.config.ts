@@ -38,7 +38,6 @@ export default defineConfig({
       'three',
       '@react-three/fiber',
       '@react-three/drei',
-      'gsap',
     ],
   },
 });

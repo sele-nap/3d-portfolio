@@ -23,8 +23,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
-    const saved = localStorage.getItem('language') as Language;
-    if (saved) return saved;
+    const saved = localStorage.getItem('language');
+    if (saved === 'fr' || saved === 'en') return saved;
 
     const browserLang = navigator.language.split('-')[0];
     return browserLang === 'fr' ? 'fr' : 'en';
@@ -33,9 +33,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('language', lang);
-    document.documentElement.lang = lang;
   };
 
+  // Single source of truth for the lang attribute
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);

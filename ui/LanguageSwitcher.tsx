@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { useLanguage } from '../app/LanguageContext';
-// @ts-ignore
 import './LanguageSwitcher.css';
 
 export function LanguageSwitcher() {

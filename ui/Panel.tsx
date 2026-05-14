@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useLanguage } from '../app/LanguageContext';
 import { LanguageSwitcher } from './LanguageSwitcher';
-// @ts-ignore: Importing CSS for side effects only
 import './Panel.css';
 
 interface PanelProps {
