@@ -29,8 +29,6 @@ function ResponsiveCamera() {
   return null;
 }
 
-interface SceneProps extends TarotCardsProps {}
-
 interface Star {
   position: [number, number, number];
   size: number;
@@ -72,7 +70,7 @@ function StarField() {
   );
 }
 
-export function Scene({ activeSection, onCardSelect }: SceneProps) {
+export function Scene({ activeSection, onCardSelect }: TarotCardsProps) {
   const { t } = useLanguage();
 
   // WCAG 2.1.1 — Keyboard navigation: buttons visually hidden but focusable,
