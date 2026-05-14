@@ -86,7 +86,8 @@ export function Scene({ activeSection, onCardSelect }: SceneProps) {
   ];
 
   return (
-    <div
+    <main
+      aria-label="Portfolio"
       style={{
         width: '100%',
         height: '100vh',
@@ -111,11 +112,12 @@ export function Scene({ activeSection, onCardSelect }: SceneProps) {
         ))}
       </nav>
 
-      {/* aria-hidden: 3D canvas is not meaningful to screen readers */}
+      {/* aria-hidden + role="presentation": canvas is purely decorative */}
       <Canvas
         dpr={[1, 2]}
         camera={{ position: [0, 0, 5], fov: 72 }}
         aria-hidden="true"
+        role="presentation"
       >
         <ResponsiveCamera />
 
@@ -159,6 +161,6 @@ export function Scene({ activeSection, onCardSelect }: SceneProps) {
 
         <StarField />
       </Canvas>
-    </div>
+    </main>
   );
 }

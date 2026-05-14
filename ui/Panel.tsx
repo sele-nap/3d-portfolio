@@ -72,13 +72,13 @@ export function Panel({ activeSection, onClose }: PanelProps) {
 
   return (
     <>
-      <div className="ui-header">
+      <header className="ui-header">
         <div className="site-identity">
           <span className="site-name">{t.hero.name}</span>
           <span className="site-role">{t.hero.title}</span>
         </div>
         <LanguageSwitcher />
-      </div>
+      </header>
 
       <footer className="ui-footer">
         <span>{t.footer.made}</span>
@@ -96,6 +96,7 @@ export function Panel({ activeSection, onClose }: PanelProps) {
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-title"
+          aria-label="Portfolio section"
           onClick={(e) => e.stopPropagation()}
         >
           <button className="modal-close" onClick={onClose} aria-label="Close">
