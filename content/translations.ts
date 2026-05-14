@@ -1,5 +1,28 @@
 export type Language = 'fr' | 'en';
 
+// Non-translatable data shared across all languages
+const CONTACT_INFO = {
+  email: 'selena.poun@gmail.com',
+  github: 'sele-nap',
+  githubUrl: 'https://github.com/sele-nap',
+  linkedin: 'selenap10',
+  linkedinUrl: 'https://www.linkedin.com/in/selenap10',
+} as const;
+
+const FOOTER_TECH = 'React • Three.js' as const;
+
+const PER_TECH = [
+  'React',
+  'Next.js',
+  'TypeScript',
+  'Express.js',
+  'SWR',
+  'MongoDB',
+  'AWS',
+] as const;
+
+const CONFIG3D_TECH = ['Vue.js', 'Three.js', 'TypeScript', 'PHP'] as const;
+
 export const translations = {
   fr: {
     hero: {
@@ -190,15 +213,7 @@ export const translations = {
           company: 'Gedeon',
           description:
             "Plateforme fintech dédiée à la gestion des Plans d'Épargne Retraite (PER), à destination des particuliers, des entreprises et des courtier·es. L'outil offre une vision à 360° de la retraite en agrégeant informations de retraite publique et épargne personnelle, avec simulateurs de taux de remplacement et projections de revenus.",
-          tech: [
-            'React',
-            'Next.js',
-            'TypeScript',
-            'Express.js',
-            'SWR',
-            'MongoDB',
-            'AWS',
-          ],
+          tech: PER_TECH,
           link: 'https://gedeon.io/',
         },
         {
@@ -207,7 +222,7 @@ export const translations = {
           company: 'Decq',
           description:
             'Outil de configuration 3D en ligne permettant aux client·es industriels et particuliers de personnaliser leurs produits en temps réel. Conçu de A à Z avec une architecture front/back maintenable et mis en production.',
-          tech: ['Vue.js', 'Three.js', 'TypeScript', 'PHP'],
+          tech: CONFIG3D_TECH,
           video: '/Config3D.mp4',
         },
       ],
@@ -217,16 +232,12 @@ export const translations = {
       title: 'Contact',
       description:
         "Si vous souhaitez collaborer ou en savoir plus sur mon travail, n'hésitez pas à me contacter. 🐸",
-      email: 'selena.poun@gmail.com',
-      github: 'sele-nap',
-      githubUrl: 'https://github.com/sele-nap',
-      linkedin: 'selenap10',
-      linkedinUrl: 'https://www.linkedin.com/in/selenap10',
+      ...CONTACT_INFO,
     },
 
     footer: {
       made: 'Fait avec 🐈‍⬛ et magie',
-      tech: 'React • Three.js',
+      tech: FOOTER_TECH,
     },
   },
 
@@ -417,15 +428,7 @@ export const translations = {
           company: 'Gedeon',
           description:
             'A fintech platform dedicated to managing Retirement Savings Plans (PERs), designed for individuals, businesses, and brokers. The tool provides a 360° view of retirement by combining information on public pensions and personal savings, along with replacement rate calculators and income projections.',
-          tech: [
-            'React',
-            'Next.js',
-            'TypeScript',
-            'Express.js',
-            'SWR',
-            'MongoDB',
-            'AWS',
-          ],
+          tech: PER_TECH,
           link: 'https://gedeon.io/',
         },
         {
@@ -434,7 +437,7 @@ export const translations = {
           company: 'Decq',
           description:
             'An online 3D configuration tool allowing industrial clients to customize their products in real time. Designed from scratch to finish with a maintainable front/back architecture and deployed to production.',
-          tech: ['Vue.js', 'Three.js', 'TypeScript', 'PHP'],
+          tech: CONFIG3D_TECH,
           video: '/Config3D.mp4',
         },
       ],
@@ -444,16 +447,12 @@ export const translations = {
       title: 'Contact',
       description:
         'If you would like to collaborate or learn more about my work, please feel free to contact me. 🐸',
-      email: 'selena.poun@gmail.com',
-      github: 'sele-nap',
-      githubUrl: 'https://github.com/sele-nap',
-      linkedin: 'selenap10',
-      linkedinUrl: 'https://www.linkedin.com/in/selenap10',
+      ...CONTACT_INFO,
     },
 
     footer: {
       made: 'Made with 🐈‍⬛ and magic',
-      tech: 'React • Three.js',
+      tech: FOOTER_TECH,
     },
   },
 } as const;

@@ -7,6 +7,8 @@ import { useLanguage } from '../app/LanguageContext';
 interface CardDef {
   id: string;
   symbol: string;
+  roman: string;
+  subtitle: string;
   label: string;
   accentColor: string;
   position: [number, number, number];
@@ -31,28 +33,42 @@ const PORTRAIT_SLOTS: SlotDef[] = [
 ];
 
 const CARD_CONFIGS = [
-  { id: 'about', symbol: '☽', accentColor: '#6b4d7a' },
-  { id: 'formations', symbol: '✦', accentColor: '#d4a574' },
-  { id: 'experiences', symbol: '✵', accentColor: '#8099b8' },
-  { id: 'contact', symbol: '✉', accentColor: '#7a9578' },
-  { id: 'projects', symbol: '⬡', accentColor: '#9a6878' },
+  {
+    id: 'about',
+    symbol: '☽',
+    accentColor: '#6b4d7a',
+    roman: 'I',
+    subtitle: '☽  the self  ☽',
+  },
+  {
+    id: 'formations',
+    symbol: '✦',
+    accentColor: '#d4a574',
+    roman: 'II',
+    subtitle: '✦  the path  ✦',
+  },
+  {
+    id: 'experiences',
+    symbol: '✵',
+    accentColor: '#8099b8',
+    roman: 'III',
+    subtitle: '✵  the journey  ✵',
+  },
+  {
+    id: 'contact',
+    symbol: '✉',
+    accentColor: '#7a9578',
+    roman: 'IV',
+    subtitle: '✉  the thread  ✉',
+  },
+  {
+    id: 'projects',
+    symbol: '⬡',
+    accentColor: '#9a6878',
+    roman: 'V',
+    subtitle: '⬡  the craft  ⬡',
+  },
 ] as const;
-
-const CARD_ROMAN: Record<string, string> = {
-  about: 'I',
-  formations: 'II',
-  experiences: 'III',
-  contact: 'IV',
-  projects: 'V',
-};
-
-const CARD_SUBTITLES: Record<string, string> = {
-  about: '☽  the self  ☽',
-  formations: '✦  the path  ✦',
-  experiences: '✵  the journey  ✵',
-  contact: '✉  the thread  ✉',
-  projects: '⬡  the craft  ⬡',
-};
 
 function drawLeafShape(ctx: CanvasRenderingContext2D, size: number) {
   ctx.beginPath();
@@ -1444,7 +1460,7 @@ function createFrontTexture(card: CardDef): THREE.CanvasTexture {
   ctx.font = '700 17px monospace';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(CARD_ROMAN[card.id] ?? 'I', W / 2, 56);
+  ctx.fillText(card.roman, W / 2, 56);
   ctx.globalAlpha = 1;
 
   drawMoonPhases(ctx, W / 2, 78, card.accentColor, 6);
@@ -1511,7 +1527,7 @@ function createFrontTexture(card: CardDef): THREE.CanvasTexture {
   ctx.font = 'italic 18px Georgia, serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(CARD_SUBTITLES[card.id] ?? '', W / 2, H * 0.776);
+  ctx.fillText(card.subtitle, W / 2, H * 0.776);
   ctx.restore();
 
   ctx.save();
