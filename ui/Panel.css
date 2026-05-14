@@ -140,14 +140,6 @@
   opacity: 0.85;
 }
 
-.modal-intro {
-  font-size: 0.9375rem;
-  line-height: 1.7;
-  color: var(--parchment);
-  margin-bottom: 0.75rem;
-  max-width: none;
-}
-
 .modal-text {
   font-size: 1rem;
   line-height: 1.7;
@@ -519,12 +511,6 @@
     padding: 0.625rem 1.25rem;
     font-size: 0.72rem;
   }
-
-  .ui-footer {
-    font-size: 0.55rem;
-    padding: 0.5rem 1rem;
-    gap: 0.4rem;
-  }
 }
 
 @media (max-height: 680px) {
@@ -536,7 +522,6 @@
     margin-bottom: 0.75rem;
   }
 
-  .modal-intro,
   .modal-text {
     font-size: 0.8125rem;
     line-height: 1.6;
