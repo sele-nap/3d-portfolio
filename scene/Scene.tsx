@@ -1,5 +1,6 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
+import { useLanguage } from '../app/LanguageContext';
 import { TarotCards, TarotCardsProps } from './TarotCards';
 
 function ResponsiveCamera() {
@@ -72,6 +73,18 @@ function StarField() {
 }
 
 export function Scene({ activeSection, onCardSelect }: SceneProps) {
+  const { t } = useLanguage();
+
+  // WCAG 2.1.1 — Keyboard navigation: buttons visually hidden but focusable,
+  // allowing section access without a mouse
+  const sections = [
+    { id: 'projects', label: t.projects.title },
+    { id: 'about', label: t.about.title },
+    { id: 'formations', label: t.formations.title },
+    { id: 'experiences', label: t.experiences.title },
+    { id: 'contact', label: t.contact.title },
+  ];
+
   return (
     <div
       style={{
@@ -85,7 +98,25 @@ export function Scene({ activeSection, onCardSelect }: SceneProps) {
           'linear-gradient(180deg, #06050a 0%, #0a080f 50%, #0d0a07 100%)',
       }}
     >
-      <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 72 }}>
+      {/* Keyboard-accessible navigation — visually hidden, shown on focus */}
+      <nav aria-label="Portfolio navigation" className="card-keyboard-nav">
+        {sections.map(({ id, label }) => (
+          <button
+            key={id}
+            onClick={() => onCardSelect(activeSection === id ? null : id)}
+            aria-pressed={activeSection === id}
+          >
+            {label}
+          </button>
+        ))}
+      </nav>
+
+      {/* aria-hidden: 3D canvas is not meaningful to screen readers */}
+      <Canvas
+        dpr={[1, 2]}
+        camera={{ position: [0, 0, 5], fov: 72 }}
+        aria-hidden="true"
+      >
         <ResponsiveCamera />
 
         <ambientLight intensity={2.2} color="#c8a060" />

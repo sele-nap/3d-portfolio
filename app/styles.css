@@ -404,3 +404,82 @@ a:hover {
 .float {
   animation: float 3s ease-in-out infinite;
 }
+
+/* WCAG 2.1 - 2.3.3: Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible focus styles for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--candle-glow);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Utility class for screen-reader-only elements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Card keyboard nav: visually hidden, shown on focus */
+.card-keyboard-nav {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.card-keyboard-nav button {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  pointer-events: auto;
+}
+
+.card-keyboard-nav button:focus-visible {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  clip: auto;
+  overflow: visible;
+  white-space: normal;
+  padding: 0.5rem 1.25rem;
+  background: rgba(9, 7, 13, 0.97);
+  border: 2px solid var(--candle-glow);
+  color: var(--parchment);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  cursor: pointer;
+}

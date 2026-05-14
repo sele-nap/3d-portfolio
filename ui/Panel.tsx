@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useRef } from 'react';
 import { useLanguage } from '../app/LanguageContext';
 import { LanguageSwitcher } from './LanguageSwitcher';
 // @ts-ignore: Importing CSS for side effects only
@@ -11,6 +12,63 @@ interface PanelProps {
 export function Panel({ activeSection, onClose }: PanelProps) {
   const { t } = useLanguage();
   const isOpen = activeSection !== null;
+  const modalBoxRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  // WCAG 2.4.3 — Focus management: move focus into modal on open,
+  // restore it to the triggering element on close
+  useEffect(() => {
+    if (isOpen) {
+      triggerRef.current = document.activeElement as HTMLElement;
+      const timer = setTimeout(() => {
+        const firstFocusable = modalBoxRef.current?.querySelector<HTMLElement>(
+          'button:not([disabled]), [href], input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        );
+        firstFocusable?.focus();
+      }, 50);
+      return () => clearTimeout(timer);
+    } else {
+      triggerRef.current?.focus();
+    }
+  }, [isOpen]);
+
+  // WCAG 2.1.2 — Focus trap + 2.1.1 — Escape key closes the modal
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (!isOpen) return;
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+
+      const el = modalBoxRef.current;
+      if (!el) return;
+      const focusable = Array.from(
+        el.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    },
+    [isOpen, onClose],
+  );
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
 
   return (
     <>
@@ -32,14 +90,23 @@ export function Panel({ activeSection, onClose }: PanelProps) {
         className={`modal-overlay ${isOpen ? 'visible' : ''}`}
         onClick={onClose}
       >
-        <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="modal-box"
+          ref={modalBoxRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+          onClick={(e) => e.stopPropagation()}
+        >
           <button className="modal-close" onClick={onClose} aria-label="Close">
             ✕
           </button>
 
           {activeSection === 'about' && (
             <div className="modal-content">
-              <h2 className="modal-title">{t.about.title}</h2>
+              <h2 id="modal-title" className="modal-title">
+                {t.about.title}
+              </h2>
               <div className="modal-accent-line" />
               <p className="modal-text">{t.about.intro}</p>
               <div className="skills-grid">
@@ -59,7 +126,9 @@ export function Panel({ activeSection, onClose }: PanelProps) {
 
           {activeSection === 'formations' && (
             <div className="modal-content">
-              <h2 className="modal-title">{t.formations.title}</h2>
+              <h2 id="modal-title" className="modal-title">
+                {t.formations.title}
+              </h2>
               <div className="modal-accent-line" />
               <p className="modal-text">{t.formations.description}</p>
               <div className="degrees-list">
@@ -96,7 +165,9 @@ export function Panel({ activeSection, onClose }: PanelProps) {
 
           {activeSection === 'experiences' && (
             <div className="modal-content">
-              <h2 className="modal-title">{t.experiences.title}</h2>
+              <h2 id="modal-title" className="modal-title">
+                {t.experiences.title}
+              </h2>
               <div className="modal-accent-line" />
               <p className="modal-text">{t.experiences.description}</p>
               <div className="degrees-list">
@@ -123,7 +194,9 @@ export function Panel({ activeSection, onClose }: PanelProps) {
 
           {activeSection === 'projects' && (
             <div className="modal-content">
-              <h2 className="modal-title">{t.projects.title}</h2>
+              <h2 id="modal-title" className="modal-title">
+                {t.projects.title}
+              </h2>
               <div className="modal-accent-line" />
               <p className="modal-text">{t.projects.description}</p>
               <div className="projects-list">
@@ -172,7 +245,9 @@ export function Panel({ activeSection, onClose }: PanelProps) {
 
           {activeSection === 'contact' && (
             <div className="modal-content">
-              <h2 className="modal-title">{t.contact.title}</h2>
+              <h2 id="modal-title" className="modal-title">
+                {t.contact.title}
+              </h2>
               <div className="modal-accent-line" />
               <p className="modal-text">{t.contact.description}</p>
               <div className="contact-links">

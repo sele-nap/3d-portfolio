@@ -576,15 +576,17 @@
   pointer-events: none;
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--stone-gray);
+  /* WCAG 1.4.3: sufficient contrast ratio (> 4.5:1) on dark background */
+  color: var(--moon-silver);
   letter-spacing: 0.08em;
+  background: linear-gradient(transparent, rgba(6, 5, 10, 0.55));
 }
 
 .footer-sep {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .footer-tech {
-  color: var(--moss-green);
-  opacity: 0.7;
+  /* WCAG 1.4.3: --sage (#7a9578) = 6.3:1 on dark background */
+  color: var(--sage);
 }
