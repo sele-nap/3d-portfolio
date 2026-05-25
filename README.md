@@ -1,12 +1,11 @@
-# Portfolio
+# sele-nap.github.io
 
-Personal portfolio with an interactive 3D scene. Built with React, TypeScript and Three.js.
+Personal portfolio — an interactive 3D tarot card scene built with React and Three.js.
 
 ## Stack
 
 - React 19 + TypeScript
 - Three.js · @react-three/fiber · @react-three/drei
-- GSAP
 - Vite
 
 ## Run locally
