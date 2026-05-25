@@ -1926,7 +1926,7 @@ export function TarotCards({ activeSection, onCardSelect }: TarotCardsProps) {
   useFrame(() => {
     if (!sceneGroupRef.current) return;
 
-    const portrait = size.height > size.width;
+    const portrait = size.height > size.width * 0.85;
     if (portrait !== prevPortrait.current) {
       prevPortrait.current = portrait;
       setIsPortrait(portrait);

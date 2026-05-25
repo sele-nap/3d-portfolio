@@ -16,13 +16,11 @@ function ResponsiveCamera() {
       ? size.width < 480
         ? 8
         : 8.5
-      : size.width < 380
-        ? 10
-        : size.width < 480
-          ? 8
-          : size.width < 768
-            ? 7
-            : 5;
+      : size.width < 480
+        ? 8
+        : size.width < 1400
+          ? 7
+          : 5;
     camera.position.z = z;
   });
 
