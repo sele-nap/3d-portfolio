@@ -1,6 +1,6 @@
-# sele-nap.github.io
+# 🐈‍⬛🍂🍄
 
-Personal portfolio — an interactive 3D tarot card scene built with React and Three.js.
+Personal portfolio: an interactive 3D tarot card scene built with React and Three.js.
 
 ## Stack
 
