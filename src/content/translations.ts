@@ -129,7 +129,7 @@ export const translations = {
     experiences: {
       title: 'Expériences',
       description:
-        "Un parcours à la croisée du web, de la 3D et de l'innovation.",
+        "Un parcours à la croisée du web, de la 3D et du design.",
       jobs: [
         {
           title: 'Développeuse Full-Stack orientée Frontend',
@@ -345,7 +345,7 @@ export const translations = {
 
     experiences: {
       title: 'Experiences',
-      description: 'A path at the crossroads of web, 3D and innovation.',
+      description: 'A path at the crossroads of web, 3D and design.',
       jobs: [
         {
           title: 'Frontend-Oriented Full-Stack Developer',
