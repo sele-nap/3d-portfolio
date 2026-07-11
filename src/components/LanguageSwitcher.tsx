@@ -1,5 +1,5 @@
+import { useLanguage } from '@/hooks/useLanguage';
 import { useRef } from 'react';
-import { useLanguage } from '../app/LanguageContext';
 import './LanguageSwitcher.css';
 
 export function LanguageSwitcher() {

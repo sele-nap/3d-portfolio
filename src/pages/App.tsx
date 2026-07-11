@@ -1,9 +1,8 @@
+import { MagicCursor } from '@/base/MagicCursor';
+import { LanguageProvider } from '@/hooks/useLanguage';
+import { MainLayout } from '@/layout/MainLayout';
+import { Scene } from '@/scene/canvas/Scene';
 import { useState } from 'react';
-import { Scene } from '../scene/Scene';
-import { MagicCursor } from '../ui/MagicCursor';
-import { Panel } from '../ui/Panel';
-import { LanguageProvider } from './LanguageContext';
-import './styles.css';
 
 export function App() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -12,7 +11,7 @@ export function App() {
     <LanguageProvider>
       <MagicCursor />
       <Scene activeSection={activeSection} onCardSelect={setActiveSection} />
-      <Panel
+      <MainLayout
         activeSection={activeSection}
         onClose={() => setActiveSection(null)}
       />

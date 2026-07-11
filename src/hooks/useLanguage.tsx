@@ -1,3 +1,4 @@
+import { Language, TranslationKey, translations } from '@/content/translations';
 import {
   createContext,
   ReactNode,
@@ -5,11 +6,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-import {
-  Language,
-  TranslationKey,
-  translations,
-} from '../content/translations';
 
 interface LanguageContextType {
   language: Language;
@@ -35,7 +31,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('language', lang);
   };
 
-  // Single source of truth for the lang attribute
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);

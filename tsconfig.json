@@ -22,9 +22,9 @@
 
     /* Path mapping */
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["app", "scene", "ui", "content"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

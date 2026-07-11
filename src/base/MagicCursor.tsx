@@ -1,3 +1,4 @@
+import { catppuccin } from '@/tokens/theme';
 import { useEffect, useRef } from 'react';
 
 interface Particle {
@@ -13,7 +14,13 @@ interface Particle {
   isStar: boolean;
 }
 
-const COLORS = ['#d4a574', '#6b4d7a', '#b8b8aa', '#7a9578', '#d9a066'];
+const COLORS = [
+  catppuccin.peach,
+  catppuccin.mauve,
+  catppuccin.subtext0,
+  catppuccin.teal,
+  catppuccin.yellow,
+];
 
 function drawStar(
   ctx: CanvasRenderingContext2D,

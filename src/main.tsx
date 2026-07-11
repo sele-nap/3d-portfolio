@@ -1,6 +1,10 @@
+import { App } from '@/pages/App';
+import '@/tokens/global.css';
+import { injectTheme } from '@/tokens/theme';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { App } from './App';
+
+injectTheme();
 
 const rootElement = document.getElementById('root');
 

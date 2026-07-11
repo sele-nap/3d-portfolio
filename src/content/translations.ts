@@ -1,6 +1,5 @@
 export type Language = 'fr' | 'en';
 
-// Non-translatable data shared across all languages
 const CONTACT_INFO = {
   email: 'selena.poun@gmail.com',
   github: 'sele-nap',

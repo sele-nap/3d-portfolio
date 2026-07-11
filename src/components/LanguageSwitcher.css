@@ -10,8 +10,8 @@
   padding: 2px;
   background: linear-gradient(
     135deg,
-    rgba(45, 36, 25, 0.8),
-    rgba(61, 90, 66, 0.5)
+    rgba(69, 71, 90, 0.8),
+    rgba(148, 226, 213, 0.35)
   );
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   transition:
@@ -25,7 +25,7 @@
 
 .lang-toggle:hover {
   border-color: var(--magic-purple);
-  box-shadow: 0 4px 15px rgba(107, 77, 122, 0.3);
+  box-shadow: 0 4px 15px rgba(203, 166, 247, 0.3);
 }
 
 .lang-option {
@@ -41,9 +41,9 @@
 }
 
 .lang-option.active {
-  background: rgba(107, 77, 122, 0.5);
+  background: rgba(203, 166, 247, 0.5);
   color: var(--parchment);
-  text-shadow: 0 0 6px rgba(212, 165, 116, 0.4);
+  text-shadow: 0 0 6px rgba(250, 179, 135, 0.4);
   border-radius: 16px;
 }
 
