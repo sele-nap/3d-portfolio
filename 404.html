@@ -1,30 +1,303 @@
 <!doctype html>
-<html>
+<html lang="fr">
   <head>
-    <meta charset="utf-8" />
-    <script>
-      var pathSegmentsToKeep = 1;
-      var l = window.location;
-      l.replace(
-        l.protocol +
-          '//' +
-          l.hostname +
-          (l.port ? ':' + l.port : '') +
-          l.pathname
-            .split('/')
-            .slice(0, 1 + pathSegmentsToKeep)
-            .join('/') +
-          '/?/' +
-          l.pathname
-            .slice(1)
-            .split('/')
-            .slice(pathSegmentsToKeep)
-            .join('/')
-            .replace(/&/g, '~and~') +
-          (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-          l.hash,
-      );
-    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#11111b" />
+    <title
+      data-fr="Carte introuvable · sele-nap"
+      data-en="Card not found · sele-nap"
+    >
+      Carte introuvable · sele-nap
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        color-scheme: dark;
+        --crust: #11111b;
+        --mantle: #181825;
+        --base: #1e1e2e;
+        --surface0: #313244;
+        --overlay1: #7f849c;
+        --subtext0: #a6adc8;
+        --text: #cdd6f4;
+        --mauve: #cba6f7;
+        --peach: #fab387;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 2rem;
+        overflow-x: hidden;
+        background: radial-gradient(
+          ellipse at 50% 40%,
+          var(--base) 0%,
+          var(--mantle) 55%,
+          var(--crust) 100%
+        );
+        font-family: 'Crimson Pro', serif;
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #stars {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+      }
+
+      .card {
+        position: relative;
+        z-index: 1;
+        width: min(360px, 100%);
+        padding: 2.5rem 2rem 2.25rem;
+        border: 1px solid rgba(203, 166, 247, 0.35);
+        border-radius: 10px;
+        background: rgba(17, 17, 27, 0.6);
+        box-shadow: 0 0 60px rgba(203, 166, 247, 0.08);
+        text-align: center;
+      }
+
+      .card::before,
+      .card::after {
+        content: '';
+        position: absolute;
+        inset: 10px;
+        border: 1px solid rgba(203, 166, 247, 0.18);
+        border-radius: 6px;
+        pointer-events: none;
+      }
+
+      .roman {
+        font-family: 'Fira Code', monospace;
+        font-size: 0.75rem;
+        letter-spacing: 0.3em;
+        color: var(--peach);
+        opacity: 0.85;
+      }
+
+      .glyph {
+        margin: 1.1rem 0 1.3rem;
+        font-size: 2.75rem;
+        line-height: 1;
+        color: var(--mauve);
+        text-shadow: 0 0 24px rgba(203, 166, 247, 0.5);
+      }
+
+      h1 {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 400;
+        font-style: italic;
+        font-size: clamp(1.75rem, 6vw, 2.25rem);
+        letter-spacing: 0.01em;
+        color: var(--text);
+        text-wrap: balance;
+      }
+
+      .accent-line {
+        width: 3rem;
+        height: 2px;
+        margin: 0.9rem auto 1.2rem;
+        border-radius: 1px;
+        background: linear-gradient(
+          90deg,
+          #d52d00,
+          #ef7627,
+          #ff9a56,
+          #ffffff,
+          #d162a4,
+          #b55690,
+          #a50062
+        );
+        opacity: 0.85;
+      }
+
+      p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: var(--subtext0);
+        max-width: 30ch;
+        margin: 0 auto;
+      }
+
+      .subtitle {
+        margin-top: 0.4rem;
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 0.85rem;
+        color: var(--peach);
+        opacity: 0.9;
+      }
+
+      a.home {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-top: 1.75rem;
+        padding: 0.7rem 1.4rem;
+        border: 1px solid rgba(250, 179, 135, 0.35);
+        border-radius: 4px;
+        background: rgba(250, 179, 135, 0.08);
+        color: var(--peach);
+        font-family: 'Fira Code', monospace;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        text-decoration: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          background-color 0.22s ease,
+          border-color 0.22s ease,
+          transform 0.22s ease;
+      }
+
+      a.home:hover {
+        background: rgba(250, 179, 135, 0.18);
+        border-color: var(--peach);
+        transform: translateY(-2px);
+      }
+
+      a.home:focus-visible {
+        outline: 2px solid var(--peach);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        a.home {
+          transition: none;
+        }
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <canvas id="stars"></canvas>
+    <main class="card">
+      <div class="roman" aria-hidden="true">○ · ∅ · ○</div>
+      <div class="glyph" aria-hidden="true">✧</div>
+      <h1 data-fr="Carte introuvable" data-en="Card Not Found">
+        Carte introuvable
+      </h1>
+      <div class="accent-line" aria-hidden="true"></div>
+      <p
+        data-fr="Cette carte n&rsquo;existe pas dans ce jeu."
+        data-en="This card doesn&rsquo;t exist in this deck."
+      >
+        Cette carte n&rsquo;existe pas dans ce jeu.
+      </p>
+      <p
+        class="subtitle"
+        data-fr="☽ perdue dans le brouillard ☾"
+        data-en="☽ lost in the fog ☾"
+      >
+        ☽ perdue dans le brouillard ☾
+      </p>
+      <a
+        class="home"
+        href="/"
+        data-fr="↩ retour au site"
+        data-en="↩ back to the site"
+      >
+        ↩ retour au site
+      </a>
+    </main>
+    <script>
+      (function () {
+        var preferred =
+          (navigator.languages && navigator.languages[0]) ||
+          navigator.language ||
+          'fr';
+        var browserLang = preferred.split('-')[0];
+        var lang = browserLang === 'fr' ? 'fr' : 'en';
+        if (lang === 'fr') return;
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+          el.textContent = el.getAttribute('data-' + lang);
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        var canvas = document.getElementById('stars');
+        var ctx = canvas.getContext('2d');
+        var colors = ['#cba6f7', '#f5c2e7', '#fab387', '#b4befe', '#94e2d5'];
+        var reducedMotion = window.matchMedia(
+          '(prefers-reduced-motion: reduce)',
+        ).matches;
+        var stars = [];
+
+        function resize() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+
+        function createStars() {
+          var count = Math.round((canvas.width * canvas.height) / 14000);
+          stars = Array.from({ length: count }, function () {
+            return {
+              x: Math.random() * canvas.width,
+              y: Math.random() * canvas.height,
+              size: Math.random() * 1.6 + 0.6,
+              color: colors[Math.floor(Math.random() * colors.length)],
+              baseOpacity: Math.random() * 0.5 + 0.15,
+              driftPhase: Math.random() * Math.PI * 2,
+              driftSpeed: 0.09 + Math.random() * 0.14,
+              driftAmount: 8 + Math.random() * 14,
+            };
+          });
+        }
+
+        function draw(time) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          var t = time / 1000;
+          stars.forEach(function (star) {
+            var phase = t * star.driftSpeed + star.driftPhase;
+            var x = star.x + Math.sin(phase) * star.driftAmount;
+            var y = star.y + Math.cos(phase * 0.7) * star.driftAmount * 0.6;
+            var opacity = reducedMotion
+              ? star.baseOpacity
+              : star.baseOpacity * (0.7 + Math.sin(phase * 1.3) * 0.3);
+            ctx.beginPath();
+            ctx.arc(x, y, star.size, 0, Math.PI * 2);
+            ctx.fillStyle = star.color;
+            ctx.globalAlpha = opacity;
+            ctx.fill();
+          });
+          ctx.globalAlpha = 1;
+          if (!reducedMotion) requestAnimationFrame(draw);
+        }
+
+        resize();
+        createStars();
+        draw(0);
+
+        window.addEventListener('resize', function () {
+          resize();
+          createStars();
+          if (reducedMotion) draw(0);
+        });
+      })();
+    </script>
+  </body>
 </html>
