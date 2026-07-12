@@ -17,9 +17,7 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
     if (isOpen) {
       triggerRef.current = document.activeElement as HTMLElement;
       const timer = setTimeout(() => {
-        const firstFocusable =
-          modalBoxRef.current?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
-        firstFocusable?.focus();
+        modalBoxRef.current?.focus();
       }, 50);
       return () => clearTimeout(timer);
     } else {
@@ -70,6 +68,7 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
       <div
         className="modal-box"
         ref={modalBoxRef}
+        tabIndex={-1}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
