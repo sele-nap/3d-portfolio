@@ -1,79 +1,117 @@
 import { sceneColors } from '@/tokens/theme';
 import { useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
-import { Mesh, MeshBasicMaterial } from 'three';
+import { Color, ShaderMaterial } from 'three';
 
-interface Star {
-  position: [number, number, number];
-  size: number;
-  color: string;
-  opacity: number;
-  driftPhase: number;
-  driftSpeed: number;
-  driftAmount: number;
-}
+const STAR_COUNT = 220;
 
 const prefersReducedMotion =
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+const vertexShader = `
+  attribute float aSize;
+  attribute vec3 aColor;
+  attribute float aPhase;
+  attribute float aSpeed;
+  attribute float aDrift;
+  attribute float aBaseOpacity;
+  uniform float uTime;
+  varying vec3 vColor;
+  varying float vOpacity;
+
+  void main() {
+    vColor = aColor;
+    float phase = uTime * aSpeed + aPhase;
+    vec3 pos = position;
+    pos.x += sin(phase) * aDrift;
+    pos.y += cos(phase * 0.7) * aDrift * 0.6;
+    vOpacity = aBaseOpacity * (0.65 + sin(phase * 1.3) * 0.35);
+    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+    gl_PointSize = aSize * (10.0 / -mvPosition.z);
+    gl_Position = projectionMatrix * mvPosition;
+  }
+`;
+
+const fragmentShader = `
+  varying vec3 vColor;
+  varying float vOpacity;
+
+  void main() {
+    vec2 uv = gl_PointCoord - vec2(0.5);
+    float dist = length(uv);
+    if (dist > 0.5) discard;
+    float alpha = smoothstep(0.5, 0.0, dist) * vOpacity;
+    gl_FragColor = vec4(vColor, alpha);
+  }
+`;
+
 export function StarField() {
-  const stars = useMemo<Star[]>(
-    () =>
-      Array.from({ length: 90 }, () => ({
-        position: [
-          (Math.random() - 0.5) * 20,
-          (Math.random() - 0.5) * 12,
-          -(Math.random() * 14 + 2),
-        ] as [number, number, number],
-        size: Math.random() * 0.025 + 0.006,
-        color:
+  const { positions, aSize, aColor, aPhase, aSpeed, aDrift, aBaseOpacity } =
+    useMemo(() => {
+      const positions = new Float32Array(STAR_COUNT * 3);
+      const aSize = new Float32Array(STAR_COUNT);
+      const aColor = new Float32Array(STAR_COUNT * 3);
+      const aPhase = new Float32Array(STAR_COUNT);
+      const aSpeed = new Float32Array(STAR_COUNT);
+      const aDrift = new Float32Array(STAR_COUNT);
+      const aBaseOpacity = new Float32Array(STAR_COUNT);
+      const tmpColor = new Color();
+
+      for (let i = 0; i < STAR_COUNT; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 20;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 12;
+        positions[i * 3 + 2] = -(Math.random() * 14 + 2);
+
+        aSize[i] = Math.random() * 4.5 + 2.5;
+
+        tmpColor.set(
           sceneColors.starField[
             Math.floor(Math.random() * sceneColors.starField.length)
           ],
-        opacity: Math.random() * 0.5 + 0.15,
-        driftPhase: Math.random() * Math.PI * 2,
-        driftSpeed: 0.09 + Math.random() * 0.14,
-        driftAmount: 0.12 + Math.random() * 0.18,
-      })),
-    [],
-  );
+        );
+        aColor[i * 3] = tmpColor.r;
+        aColor[i * 3 + 1] = tmpColor.g;
+        aColor[i * 3 + 2] = tmpColor.b;
 
-  const meshRefs = useRef<(Mesh | null)[]>([]);
+        aPhase[i] = Math.random() * Math.PI * 2;
+        aSpeed[i] = 0.09 + Math.random() * 0.14;
+        aDrift[i] = 0.12 + Math.random() * 0.18;
+        aBaseOpacity[i] = Math.random() * 0.5 + 0.35;
+      }
+
+      return { positions, aSize, aColor, aPhase, aSpeed, aDrift, aBaseOpacity };
+    }, []);
+
+  const materialRef = useRef<ShaderMaterial>(null);
 
   useFrame(({ clock }) => {
-    if (prefersReducedMotion) return;
-    const t = clock.elapsedTime;
-    stars.forEach((star, i) => {
-      const mesh = meshRefs.current[i];
-      if (!mesh) return;
-      const phase = t * star.driftSpeed + star.driftPhase;
-      mesh.position.x = star.position[0] + Math.sin(phase) * star.driftAmount;
-      mesh.position.y =
-        star.position[1] + Math.cos(phase * 0.7) * star.driftAmount * 0.6;
-      const material = mesh.material as MeshBasicMaterial;
-      material.opacity = star.opacity * (0.7 + Math.sin(phase * 1.3) * 0.3);
-    });
+    if (prefersReducedMotion || !materialRef.current) return;
+    materialRef.current.uniforms.uTime.value = clock.elapsedTime;
   });
 
   return (
-    <>
-      {stars.map((star, i) => (
-        <mesh
-          key={i}
-          position={star.position}
-          ref={(el) => {
-            meshRefs.current[i] = el;
-          }}
-        >
-          <sphereGeometry args={[star.size, 6, 6]} />
-          <meshBasicMaterial
-            color={star.color}
-            transparent
-            opacity={star.opacity}
-          />
-        </mesh>
-      ))}
-    </>
+    <points>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+        <bufferAttribute attach="attributes-aSize" args={[aSize, 1]} />
+        <bufferAttribute attach="attributes-aColor" args={[aColor, 3]} />
+        <bufferAttribute attach="attributes-aPhase" args={[aPhase, 1]} />
+        <bufferAttribute attach="attributes-aSpeed" args={[aSpeed, 1]} />
+        <bufferAttribute attach="attributes-aDrift" args={[aDrift, 1]} />
+        <bufferAttribute
+          attach="attributes-aBaseOpacity"
+          args={[aBaseOpacity, 1]}
+        />
+      </bufferGeometry>
+      <shaderMaterial
+        ref={materialRef}
+        uniforms={{ uTime: { value: 0 } }}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        transparent
+        depthWrite={false}
+      />
+    </points>
   );
 }
