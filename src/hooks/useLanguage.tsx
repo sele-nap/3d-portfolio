@@ -22,7 +22,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const saved = localStorage.getItem('language');
     if (saved === 'fr' || saved === 'en') return saved;
 
-    const browserLang = navigator.language.split('-')[0];
+    const preferred =
+      (navigator.languages && navigator.languages[0]) || navigator.language;
+    const browserLang = preferred.split('-')[0];
     return browserLang === 'fr' ? 'fr' : 'en';
   });
 

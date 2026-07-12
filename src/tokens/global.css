@@ -108,7 +108,10 @@ a {
   color: var(--candle-glow);
   text-decoration: none;
   position: relative;
-  transition: all var(--transition-base);
+  transition:
+    color var(--transition-base),
+    border-bottom-color var(--transition-base),
+    text-shadow var(--transition-base);
   border-bottom: 1px solid transparent;
 }
 

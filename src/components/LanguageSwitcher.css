@@ -35,7 +35,10 @@
   text-transform: uppercase;
   font-weight: 600;
   color: var(--stone-gray);
-  transition: all var(--transition-base);
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base),
+    text-shadow var(--transition-base);
   position: relative;
   pointer-events: none;
 }

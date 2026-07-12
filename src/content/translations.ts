@@ -32,15 +32,15 @@ export const translations = {
     about: {
       title: 'À propos',
       intro:
-        "Développeuse full-stack spécialisée en JavaScript et TypeScript, avec une expérience en applications web, mobile et outils 3D interactifs. Attachée à la performance, à l'UX et à la qualité du code.",
+        'Développeuse full-stack spécialisée en JavaScript et TypeScript, avec une expérience en applications web, mobile et outils 3D interactifs. Attachée à la performance, à l’UX et à la qualité du code.',
       skills: {
         atouts: {
           title: 'Atouts',
           items: [
             'Autonomie',
             'Rigueur',
-            "Capacité d'adaptation",
-            "Esprit d'équipe",
+            'Capacité d’adaptation',
+            'Esprit d’équipe',
           ],
         },
         tech: {
@@ -74,7 +74,7 @@ export const translations = {
           ],
         },
         interests: {
-          title: "Centres d'intérêt",
+          title: 'Centres d’intérêt',
           items: ['Gaming', 'Marche', 'Lecture'],
         },
       },
@@ -86,14 +86,14 @@ export const translations = {
         'Un parcours à la croisée du design, de la technique et de la narration numérique.',
       degrees: [
         {
-          title: "Conceptrice / Développeuse d'Applications",
+          title: 'Conceptrice / Développeuse d’Applications',
           period: '2021 – 2023',
           school: 'Wild Code School',
           location: 'Lyon, France',
           highlights: [
             'Spécialisation en JavaScript, TypeScript, Node.js, React',
             'Réalisation de projets en méthodologies Agile et workflows collaboratifs',
-            "Développement d'APIs REST et d'interfaces responsives",
+            'Développement d’APIs REST et d’interfaces responsives',
           ],
         },
         {
@@ -105,7 +105,7 @@ export const translations = {
           highlights: [
             'Conception de systèmes interactifs en réalité augmentée et réalité virtuelle avec Unity',
             'UX/UI design, création de contenus interactifs, storytelling transmedia',
-            "Mémoire : « Le rôle de l'image dans l'exploitation animale : les perceptions issues des manifestations de L214 contre l'exploitation animale. »",
+            'Mémoire : « Le rôle de l’image dans l’exploitation animale : les perceptions issues des manifestations de L214 contre l’exploitation animale. »',
           ],
         },
         {
@@ -116,7 +116,7 @@ export const translations = {
           highlights: [
             'Formation aux outils numériques (HTML/CSS, Adobe Suite), à la communication et à la gestion de projets culturels',
             'Spécialisation dans la production de médias numériques, la médiation culturelle et le contenu éditorial',
-            "Cours d'anglais avancé et communication numérique",
+            'Cours d’anglais avancé et communication numérique',
           ],
         },
       ],
@@ -128,20 +128,19 @@ export const translations = {
 
     experiences: {
       title: 'Expériences',
-      description:
-        "Un parcours à la croisée du web, de la 3D et du design.",
+      description: 'Un parcours à la croisée du web, de la 3D et du design.',
       jobs: [
         {
           title: 'Développeuse Full-Stack orientée Frontend',
-          period: "Avril 2026 – aujourd'hui",
+          period: 'Avril 2026 – aujourd’hui',
           company: 'Gedeon',
           location: 'Lyon, France',
           highlights: [
-            "Développement d'interfaces accessibles et performantes (React, Next.js) alignées sur le design system",
-            "Intégration d'APIs REST via SWR et développement de services backend (Express.js, Lambda AWS)",
+            'Développement d’interfaces accessibles et performantes (React, Next.js) alignées sur le design system',
+            'Intégration d’APIs REST via SWR et développement de services backend (Express.js, Lambda AWS)',
             'Manipulation de données avec Mongoose / MongoDB',
-            "Contribution à l'architecture orientée services et montée en compétence sur AWS (Lambda, S3, CloudWatch)",
-            "Tests unitaires et d'intégration, revues de code et respect des conventions d'équipe",
+            'Contribution à l’architecture orientée services et montée en compétence sur AWS (Lambda, S3, CloudWatch)',
+            'Tests unitaires et d’intégration, revues de code et respect des conventions d’équipe',
           ],
         },
         {
@@ -150,10 +149,10 @@ export const translations = {
           company: 'Decq',
           location: 'Saint-Priest, France',
           highlights: [
-            "Développement d'un configurateur 3D en ligne en Vue.js, Three.js, TypeScript et PHP",
+            'Développement d’un configurateur 3D en ligne en Vue.js, Three.js, TypeScript et PHP',
             'Conception de composants interactifs et rendu 3D temps réel',
-            "Optimisation de l'UX et refonte modulaire du code en lien avec l'équipe design",
-            "Mise en production de l'outil, utilisé par plusieurs clients industriels",
+            'Optimisation de l’UX et refonte modulaire du code en lien avec l’équipe design',
+            'Mise en production de l’outil, utilisé par plusieurs clients industriels',
             'Réalisation majeure : livrable final mis en production, conçu de A à Z avec une architecture front/back maintenable.',
           ],
         },
@@ -183,7 +182,7 @@ export const translations = {
           company: 'Université Savoie Mont Blanc',
           location: 'Chambéry, France',
           highlights: [
-            "Réalisation d'un prototype VR sous Unity (C#) pour un projet de thèse",
+            'Réalisation d’un prototype VR sous Unity (C#) pour un projet de thèse',
           ],
         },
         {
@@ -208,10 +207,10 @@ export const translations = {
       items: [
         {
           title: 'Plan Épargne Retraite',
-          period: "Avril 2026 – aujourd'hui",
+          period: 'Avril 2026 – aujourd’hui',
           company: 'Gedeon',
           description:
-            "Plateforme fintech dédiée à la gestion des Plans d'Épargne Retraite (PER), à destination des particuliers, des entreprises et des courtier·es. L'outil offre une vision à 360° de la retraite en agrégeant informations de retraite publique et épargne personnelle, avec simulateurs de taux de remplacement et projections de revenus.",
+            'Plateforme fintech dédiée à la gestion des Plans d’Épargne Retraite (PER), à destination des particuliers, des entreprises et des courtier·es. L’outil offre une vision à 360° de la retraite en agrégeant informations de retraite publique et épargne personnelle, avec simulateurs de taux de remplacement et projections de revenus.',
           tech: PER_TECH,
           link: 'https://gedeon.io/',
         },
@@ -230,7 +229,7 @@ export const translations = {
     contact: {
       title: 'Contact',
       description:
-        "Si vous souhaitez collaborer ou en savoir plus sur mon travail, n'hésitez pas à me contacter. 🐸",
+        'Si vous souhaitez collaborer ou en savoir plus sur mon travail, n’hésitez pas à me contacter. 🐸',
       ...CONTACT_INFO,
     },
 
@@ -322,11 +321,11 @@ export const translations = {
           highlights: [
             'Designed and developed interactive digital systems in virtual and augmented reality using Unity',
             'Focused on UX/UI design, interactive content creation, and transmedia storytelling',
-            "Master's thesis: 'The role of imagery in animal exploitation: Perceptions from L214 protests against animal exploitation.'",
+            'Master’s thesis: ‘The role of imagery in animal exploitation: Perceptions from L214 protests against animal exploitation.’',
           ],
         },
         {
-          title: "Bachelor's Degree in Book & Multimedia Studies",
+          title: 'Bachelor’s Degree in Book & Multimedia Studies',
           period: '2014 – 2017',
           school: 'University of Clermont Auvergne',
           location: 'Clermont-Ferrand, France',

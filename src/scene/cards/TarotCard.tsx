@@ -6,6 +6,10 @@ import * as THREE from 'three';
 import { Group, Mesh, PointLight } from 'three';
 import { CardDef } from './card-configs';
 
+const prefersReducedMotion =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 interface TarotCardProps {
   def: CardDef;
   isActive: boolean;
@@ -95,7 +99,9 @@ export function TarotCard({
   useFrame((_state, delta) => {
     dealClock.current += delta;
     if (dealClock.current > dealDelay && dealProgress.current < 1) {
-      dealProgress.current = Math.min(1, dealProgress.current + delta / 0.85);
+      dealProgress.current = prefersReducedMotion
+        ? 1
+        : Math.min(1, dealProgress.current + delta / 0.85);
     }
     const t = dealProgress.current;
     const ease = 1 - Math.pow(1 - t, 3);
@@ -103,22 +109,22 @@ export function TarotCard({
     hoverLift.current = THREE.MathUtils.lerp(
       hoverLift.current,
       isHovered ? 1 : 0,
-      1 - Math.pow(0.02, delta),
+      prefersReducedMotion ? 1 : 1 - Math.pow(0.02, delta),
     );
     activeLift.current = THREE.MathUtils.lerp(
       activeLift.current,
       isActive ? 1 : 0,
-      1 - Math.pow(0.015, delta),
+      prefersReducedMotion ? 1 : 1 - Math.pow(0.015, delta),
     );
     glowIntensity.current = THREE.MathUtils.lerp(
       glowIntensity.current,
       isActive ? 1 : isHovered ? 0.7 : 0,
-      1 - Math.pow(0.02, delta),
+      prefersReducedMotion ? 1 : 1 - Math.pow(0.02, delta),
     );
     dimProgress.current = THREE.MathUtils.lerp(
       dimProgress.current,
       isAnyActive && !isActive ? 1 : 0,
-      1 - Math.pow(0.02, delta),
+      prefersReducedMotion ? 1 : 1 - Math.pow(0.02, delta),
     );
 
     if (groupRef.current) {
@@ -135,7 +141,7 @@ export function TarotCard({
         );
         settledBaseY.current = THREE.MathUtils.lerp(-8, def.position[1], ease);
       } else {
-        const snap = 1 - Math.pow(0.005, delta);
+        const snap = prefersReducedMotion ? 1 : 1 - Math.pow(0.005, delta);
         groupRef.current.position.x = THREE.MathUtils.lerp(
           groupRef.current.position.x,
           def.position[0],
@@ -177,7 +183,7 @@ export function TarotCard({
     flipProgress.current = THREE.MathUtils.lerp(
       flipProgress.current,
       isActive ? 1 : 0,
-      1 - Math.pow(0.004, delta),
+      prefersReducedMotion ? 1 : 1 - Math.pow(0.004, delta),
     );
 
     if (meshRef.current) {
