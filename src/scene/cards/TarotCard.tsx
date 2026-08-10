@@ -52,7 +52,7 @@ export function TarotCard({
     const ctx2d = canvas.getContext('2d');
     if (!ctx2d) throw new Error('Canvas 2D context unavailable');
     const ratioX = 2.0 / 3.0;
-    const ratioY = 3.3 / 4.6;
+    const ratioY = 3.5 / 5.25;
     const cw = 256 * ratioX;
     const ch = 256 * ratioY;
     const cx = (256 - cw) / 2;
@@ -197,7 +197,7 @@ export function TarotCard({
   return (
     <group ref={groupRef} position={[0, -8, 0]}>
       <mesh position={[0, 0, 0.02]}>
-        <planeGeometry args={[3.0, 4.6]} />
+        <planeGeometry args={[3.0, 5.25]} />
         <meshBasicMaterial
           ref={glowBorderRef}
           map={glowTexture}
@@ -215,7 +215,7 @@ export function TarotCard({
         castShadow
         receiveShadow
       >
-        <boxGeometry args={[2.0, 3.3, 0.02]} />
+        <boxGeometry args={[2.0, 3.5, 0.02]} />
         <meshStandardMaterial
           attach="material-0"
           color={def.accentColor}

@@ -1,13 +1,21 @@
 import { sceneColors } from '@/tokens/theme';
 import { useFrame } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Color, ShaderMaterial } from 'three';
 
 const STAR_COUNT = 220;
 
-const prefersReducedMotion =
-  typeof window !== 'undefined' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReduced(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
+  return reduced;
+}
 
 const vertexShader = `
   attribute float aSize;
@@ -47,6 +55,7 @@ const fragmentShader = `
 `;
 
 export function StarField() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const { positions, aSize, aColor, aPhase, aSpeed, aDrift, aBaseOpacity } =
     useMemo(() => {
       const positions = new Float32Array(STAR_COUNT * 3);
@@ -75,8 +84,8 @@ export function StarField() {
         aColor[i * 3 + 2] = tmpColor.b;
 
         aPhase[i] = Math.random() * Math.PI * 2;
-        aSpeed[i] = 0.09 + Math.random() * 0.14;
-        aDrift[i] = 0.12 + Math.random() * 0.18;
+        aSpeed[i] = 0.18 + Math.random() * 0.28;
+        aDrift[i] = 0.24 + Math.random() * 0.34;
         aBaseOpacity[i] = Math.random() * 0.5 + 0.35;
       }
 
