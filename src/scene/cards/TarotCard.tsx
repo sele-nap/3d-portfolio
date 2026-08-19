@@ -123,7 +123,7 @@ export function TarotCard({
     );
     dimProgress.current = THREE.MathUtils.lerp(
       dimProgress.current,
-      isAnyActive && !isActive ? 1 : 0,
+      isAnyActive ? 1 : 0,
       prefersReducedMotion ? 1 : 1 - Math.pow(0.02, delta),
     );
 
