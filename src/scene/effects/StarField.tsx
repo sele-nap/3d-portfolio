@@ -93,10 +93,12 @@ export function StarField() {
     }, []);
 
   const materialRef = useRef<ShaderMaterial>(null);
+  const startTime = useRef(performance.now());
 
-  useFrame(({ clock }) => {
+  useFrame(() => {
     if (prefersReducedMotion || !materialRef.current) return;
-    materialRef.current.uniforms.uTime.value = clock.elapsedTime;
+    materialRef.current.uniforms.uTime.value =
+      (performance.now() - startTime.current) / 1000;
   });
 
   return (
