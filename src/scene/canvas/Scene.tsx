@@ -53,7 +53,6 @@ export function Scene({ activeSection, onCardSelect }: TarotCardsProps) {
         left: 0,
         zIndex: 0,
         background: `linear-gradient(180deg, ${bgFrom} 0%, ${bgMid} 50%, ${bgTo} 100%)`,
-        willChange: 'transform',
       }}
     >
       <nav aria-label="Portfolio navigation" className="card-keyboard-nav">

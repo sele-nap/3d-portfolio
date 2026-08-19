@@ -92,6 +92,7 @@ export function StarField() {
       return { positions, aSize, aColor, aPhase, aSpeed, aDrift, aBaseOpacity };
     }, []);
 
+  const uniforms = useMemo(() => ({ uTime: { value: 0 } }), []);
   const materialRef = useRef<ShaderMaterial>(null);
   const startTime = useRef(performance.now());
 
@@ -117,7 +118,7 @@ export function StarField() {
       </bufferGeometry>
       <shaderMaterial
         ref={materialRef}
-        uniforms={{ uTime: { value: 0 } }}
+        uniforms={uniforms}
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         transparent
