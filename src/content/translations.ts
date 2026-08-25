@@ -32,7 +32,7 @@ const MEOW_FIXTURES_TECH = [
 export const translations = {
   fr: {
     hero: {
-      name: 'Séléna Poun',
+      name: 'Séléna 🐾',
       title: '• Développeuse web full-stack •',
     },
 
@@ -258,7 +258,7 @@ export const translations = {
 
   en: {
     hero: {
-      name: 'Séléna Poun',
+      name: 'Séléna 🐾',
       title: '• Full-Stack Web Developer •',
     },
 
