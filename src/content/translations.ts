@@ -21,6 +21,13 @@ const PER_TECH = [
 ] as const;
 
 const CONFIG3D_TECH = ['Vue.js', 'Three.js', 'TypeScript', 'PHP'] as const;
+const MEOW_FIXTURES_TECH = [
+  'TypeScript',
+  'Node.js',
+  'CLI',
+  'Sharp',
+  'PDFKit',
+] as const;
 
 export const translations = {
   fr: {
@@ -205,6 +212,16 @@ export const translations = {
         'Une sélection de réalisations concrètes, de la conception à la mise en production.',
       linkLabel: 'Voir le site',
       items: [
+        {
+          title: 'meow-fixtures',
+          period: 'Juin 2026',
+          company: 'Projet personnel',
+          description:
+            'Les fixtures de test n’ont pas à être ennuyeuses. Cette CLI Node.js open-source génère des données peuplées de chats : pixel art, photos réelles, et 9 formats d’export (PNG, JSON, CSV, PDF, SQL, Markdown, TypeScript, base64). Résultats reproductibles via seed et API programmatique pour une intégration directe dans vos projets.',
+          tech: MEOW_FIXTURES_TECH,
+          link: 'https://github.com/sele-nap/meow-fixtures',
+          linkLabel: 'Voir le repo',
+        },
         {
           title: 'Plan Épargne Retraite',
           period: 'Avril 2026 – aujourd’hui',
@@ -420,6 +437,16 @@ export const translations = {
       description: 'A selection of concrete work, from design to production.',
       linkLabel: 'Visit website',
       items: [
+        {
+          title: 'meow-fixtures',
+          period: 'June 2026',
+          company: 'Personal project',
+          description:
+            'Test fixtures don’t have to be boring. This open-source Node.js CLI generates cat-populated data: pixel art, real photos, and 9 export formats (PNG, JSON, CSV, PDF, SQL, Markdown, TypeScript, base64). Reproducible output via seed and a programmatic API for direct integration into your projects.',
+          tech: MEOW_FIXTURES_TECH,
+          link: 'https://github.com/sele-nap/meow-fixtures',
+          linkLabel: 'View repo',
+        },
         {
           title: 'Retirement Savings Plan',
           period: 'April 2026 – Present',

@@ -5,6 +5,7 @@ interface ProjectItemData {
   description: string;
   tech: readonly string[];
   link?: string;
+  linkLabel?: string;
   video?: string;
 }
 
@@ -38,7 +39,7 @@ export function ProjectItem({ project, linkLabel }: ProjectItemProps) {
           className="project-link-btn"
         >
           <span className="project-link-icon">↗</span>
-          {linkLabel}
+          {project.linkLabel || linkLabel}
         </a>
       )}
       {project.video && (
