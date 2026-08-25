@@ -7,18 +7,7 @@
 }
 
 :root {
-  --magic-purple: #cba6f7;
-  --candle-glow: #fab387;
-  --amber-warm: #f9e2af;
-  --moon-silver: #a6adc8;
-
-  --moss-green: #45475a;
-  --sage: #94e2d5;
-
-  --black-forest: #11111b;
-  --stone-gray: #585b70;
-  --parchment: #cdd6f4;
-  --cream: #cdd6f4;
+  /* Theme colors are injected by injectTheme() in theme.ts */
 
   --font-primary: 'Crimson Pro', serif;
   --font-accent: 'Cormorant Garamond', serif;

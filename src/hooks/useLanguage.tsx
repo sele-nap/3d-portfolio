@@ -19,8 +19,12 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
-    const saved = localStorage.getItem('language');
-    if (saved === 'fr' || saved === 'en') return saved;
+    try {
+      const saved = localStorage.getItem('language');
+      if (saved === 'fr' || saved === 'en') return saved;
+    } catch {
+      // localStorage unavailable (incognito, SSR, etc.)
+    }
 
     const preferred =
       (navigator.languages && navigator.languages[0]) || navigator.language;
@@ -30,7 +34,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('language', lang);
+    try {
+      localStorage.setItem('language', lang);
+    } catch {
+      // localStorage unavailable
+    }
   };
 
   useEffect(() => {

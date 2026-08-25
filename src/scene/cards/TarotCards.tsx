@@ -35,13 +35,16 @@ export function TarotCards({ activeSection, onCardSelect }: TarotCardsProps) {
 
   const dynamicSlots = isPortrait ? PORTRAIT_SLOTS : LANDSCAPE_SLOTS;
 
-  const labelMap: Record<string, string> = {
-    about: t.about.title,
-    formations: t.formations.title,
-    experiences: t.experiences.title,
-    contact: t.contact.title,
-    projects: t.projects.title,
-  };
+  const labelMap = useMemo<Record<string, string>>(
+    () => ({
+      about: t.about.title,
+      formations: t.formations.title,
+      experiences: t.experiences.title,
+      contact: t.contact.title,
+      projects: t.projects.title,
+    }),
+    [t],
+  );
 
   const cards: CardDef[] = useMemo(
     () =>
@@ -50,7 +53,7 @@ export function TarotCards({ activeSection, onCardSelect }: TarotCardsProps) {
         label: labelMap[cfg.id],
         position: dynamicSlots[slotOrder[i]].position,
       })),
-    [t, slotOrder, dynamicSlots],
+    [labelMap, slotOrder, dynamicSlots],
   );
 
   const handleSelect = useCallback(

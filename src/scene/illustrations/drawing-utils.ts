@@ -255,9 +255,13 @@ export function drawSpiderWeb(
     ctx.beginPath();
     for (let i = 0; i <= spokes; i++) {
       const a = (i / spokes) * Math.PI * 2;
-      i === 0
-        ? ctx.moveTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr)
-        : ctx.lineTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr);
+      const x = cx + Math.cos(a) * rr;
+      const y = cy + Math.sin(a) * rr;
+      if (i === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
     }
     ctx.stroke();
   }

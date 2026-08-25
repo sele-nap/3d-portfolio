@@ -617,9 +617,13 @@ function drawProjectsIllustration(
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
       const a = (i * Math.PI) / 3 - Math.PI / 6;
-      i === 0
-        ? ctx.moveTo(hx + r * Math.cos(a), hy + r * Math.sin(a))
-        : ctx.lineTo(hx + r * Math.cos(a), hy + r * Math.sin(a));
+      const x = hx + r * Math.cos(a);
+      const y = hy + r * Math.sin(a);
+      if (i === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
     }
     ctx.closePath();
   };
