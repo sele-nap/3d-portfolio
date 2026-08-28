@@ -7,14 +7,13 @@ import { cardBackgroundGradients, catppuccin } from '@/tokens/theme';
 import * as THREE from 'three';
 import {
   drawConstellationDots,
-  drawCrystalCluster,
+  drawLeafArc,
   drawMoonPhases,
   drawMushroom,
   drawOrnamentalCorner,
   drawOuterRing,
   drawPentagram,
   drawScatteredStars,
-  drawSpiderWeb,
   drawSprig,
   drawVineBorder,
 } from './drawing-utils';
@@ -83,20 +82,28 @@ function drawAboutIllustration(
   ctx.stroke();
   ctx.restore();
   const cStars = [
-    { x: cx + 60, y: cy - 82 },
-    { x: cx - 50, y: cy - 96 },
-    { x: cx + 90, y: cy - 28 },
-    { x: cx - 80, y: cy + 42 },
-    { x: cx + 45, y: cy + 96 },
+    { x: cx - 88, y: cy - 98 },
+    { x: cx - 48, y: cy - 66 },
+    { x: cx + 2, y: cy - 100 },
+    { x: cx + 50, y: cy - 62 },
+    { x: cx + 90, y: cy - 90 },
     { x: cx - 35, y: cy + 108 },
+    { x: cx + 45, y: cy + 96 },
+  ];
+  const cEdges: [number, number][] = [
+    [0, 1],
+    [1, 2],
+    [2, 3],
+    [3, 4],
   ];
   ctx.strokeStyle = `${card.accentColor}25`;
   ctx.lineWidth = 0.7;
-  ctx.beginPath();
-  cStars.forEach((s, i) =>
-    i === 0 ? ctx.moveTo(s.x, s.y) : ctx.lineTo(s.x, s.y),
-  );
-  ctx.stroke();
+  cEdges.forEach(([a, b]) => {
+    ctx.beginPath();
+    ctx.moveTo(cStars[a].x, cStars[a].y);
+    ctx.lineTo(cStars[b].x, cStars[b].y);
+    ctx.stroke();
+  });
   cStars.forEach((s) => {
     ctx.save();
     ctx.shadowColor = catppuccin.text;
@@ -116,16 +123,10 @@ function drawAboutIllustration(
   drawMushroom(ctx, cx - 26, cy + 170, 18, catppuccin.rosewater);
   drawMushroom(ctx, cx + 28, cy + 156, 20, catppuccin.maroon);
   ctx.restore();
-  ctx.save();
-  ctx.globalAlpha = 0.62;
-  drawSprig(ctx, cx - 152, cy + 20, 0.3, card.accentColor, 1.2);
-  drawSprig(ctx, cx + 152, cy + 20, Math.PI - 0.3, card.accentColor, 1.2);
-  ctx.restore();
-  ctx.save();
-  ctx.globalAlpha = 0.88;
-  drawCrystalCluster(ctx, cx - 138, cy - 88, card.accentColor, 0.72);
-  drawCrystalCluster(ctx, cx + 138, cy - 88, card.accentColor, 0.72);
-  ctx.restore();
+  drawLeafArc(ctx, cx, cy, 136, -2.85, -2.15, card.accentColor, 7, 11);
+  drawLeafArc(ctx, cx, cy, 136, -0.85, -0.15, card.accentColor, 7, 11);
+  drawLeafArc(ctx, cx, cy, 136, 2.35, 3.0, card.accentColor, 6, 11);
+  drawLeafArc(ctx, cx, cy, 136, 0.15, 0.8, card.accentColor, 6, 11);
 }
 
 function drawFormationsIllustration(
@@ -263,25 +264,34 @@ function drawFormationsIllustration(
   ctx.restore();
 
   const cStars = [
-    { x: cx + 78, y: cy - 96 },
-    { x: cx - 82, y: cy - 82 },
-    { x: cx + 112, y: cy + 12 },
-    { x: cx - 108, y: cy + 26 },
-    { x: cx + 62, y: cy + 106 },
-    { x: cx - 56, y: cy + 114 },
+    { x: cx - 100, y: cy - 78 },
+    { x: cx - 68, y: cy - 100 },
+    { x: cx - 20, y: cy - 112 },
+    { x: cx + 28, y: cy - 108 },
+    { x: cx + 72, y: cy - 96 },
+    { x: cx + 102, y: cy - 72 },
+    { x: cx - 85, y: cy + 60 },
+    { x: cx - 85, y: cy + 108 },
+    { x: cx - 110, y: cy + 84 },
+    { x: cx - 60, y: cy + 84 },
+  ];
+  const cEdges: [number, number][] = [
+    [0, 1],
+    [1, 2],
+    [2, 3],
+    [3, 4],
+    [4, 5],
+    [6, 7],
+    [8, 9],
   ];
   ctx.strokeStyle = `${card.accentColor}28`;
   ctx.lineWidth = 0.7;
-  ctx.beginPath();
-  cStars
-    .slice(0, 3)
-    .forEach((s, i) => (i === 0 ? ctx.moveTo(s.x, s.y) : ctx.lineTo(s.x, s.y)));
-  ctx.stroke();
-  ctx.beginPath();
-  cStars
-    .slice(3)
-    .forEach((s, i) => (i === 0 ? ctx.moveTo(s.x, s.y) : ctx.lineTo(s.x, s.y)));
-  ctx.stroke();
+  cEdges.forEach(([a, b]) => {
+    ctx.beginPath();
+    ctx.moveTo(cStars[a].x, cStars[a].y);
+    ctx.lineTo(cStars[b].x, cStars[b].y);
+    ctx.stroke();
+  });
   cStars.forEach((s) => {
     ctx.save();
     ctx.shadowColor = catppuccin.text;
@@ -299,7 +309,7 @@ function drawFormationsIllustration(
     { x: cx + 90, y: cy - 58 },
     { x: cx - 86, y: cy - 46 },
     { x: cx + 94, y: cy + 56 },
-    { x: cx - 90, y: cy + 68 },
+    { x: cx + 62, y: cy + 106 },
   ].forEach((s, i) => {
     ctx.fillStyle = card.accentColor;
     ctx.globalAlpha = 0.65 + (i % 3) * 0.1;
@@ -310,17 +320,10 @@ function drawFormationsIllustration(
     ctx.globalAlpha = 1;
   });
 
-  ctx.save();
-  ctx.globalAlpha = 0.78;
-  drawCrystalCluster(ctx, cx - 126, cy - 44, card.accentColor, 0.68);
-  drawCrystalCluster(ctx, cx + 126, cy - 44, card.accentColor, 0.68);
-  ctx.restore();
-
-  ctx.save();
-  ctx.globalAlpha = 0.55;
-  drawSprig(ctx, cx + 140, cy + 18, Math.PI - 0.25, card.accentColor, 1.05);
-  drawSprig(ctx, cx - 140, cy + 18, 0.25, card.accentColor, 1.05);
-  ctx.restore();
+  drawLeafArc(ctx, cx, cy, 139, -2.95, -2.45, card.accentColor, 5, 10);
+  drawLeafArc(ctx, cx, cy, 139, -0.55, -0.05, card.accentColor, 5, 10);
+  drawLeafArc(ctx, cx, cy, 139, 2.4, 2.95, card.accentColor, 5, 10);
+  drawLeafArc(ctx, cx, cy, 139, 0.15, 0.7, card.accentColor, 5, 10);
 }
 
 function drawContactIllustration(
@@ -331,41 +334,7 @@ function drawContactIllustration(
 ) {
   drawOuterRing(ctx, cx, cy, card.accentColor, 132);
 
-  ctx.save();
-  ctx.globalAlpha = 1.0;
-  drawSpiderWeb(ctx, cx + 108, cy - 98, 72, card.accentColor);
-  ctx.restore();
-
-  for (let a = 0; a < Math.PI * 2; a += Math.PI / 10) {
-    const lx = cx + Math.cos(a) * 112,
-      ly = cy + Math.sin(a) * 112;
-    ctx.save();
-    ctx.translate(lx, ly);
-    ctx.rotate(a + Math.PI / 2);
-    ctx.fillStyle = card.accentColor;
-    ctx.globalAlpha = 0.55 + Math.sin(a * 2) * 0.15;
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.bezierCurveTo(-6, -4.5, -5, -12, 0, -15);
-    ctx.bezierCurveTo(5, -12, 6, -4.5, 0, 0);
-    ctx.fill();
-    ctx.restore();
-  }
-  for (let a = Math.PI / 20; a < Math.PI * 2; a += Math.PI / 10) {
-    const lx = cx + Math.cos(a) * 118,
-      ly = cy + Math.sin(a) * 118;
-    ctx.save();
-    ctx.translate(lx, ly);
-    ctx.rotate(a + Math.PI / 2);
-    ctx.fillStyle = card.accentColor;
-    ctx.globalAlpha = 0.38;
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.bezierCurveTo(-4, -3, -3.5, -9, 0, -11);
-    ctx.bezierCurveTo(3.5, -9, 4, -3, 0, 0);
-    ctx.fill();
-    ctx.restore();
-  }
+  drawLeafArc(ctx, cx, cy, 136, 1.15, 1.95, card.accentColor, 7, 11);
 
   ctx.save();
   ctx.shadowColor = card.accentColor;
@@ -409,10 +378,8 @@ function drawContactIllustration(
   ctx.fillStyle = card.accentColor;
   ctx.lineWidth = 1.2;
   ctx.globalAlpha = 0.55;
-  const qx = cx - 110,
-    qy = cy - 90;
   ctx.save();
-  ctx.translate(qx, qy);
+  ctx.translate(cx - 110, cy - 90);
   ctx.rotate(0.6);
   ctx.beginPath();
   ctx.moveTo(0, -38);
@@ -437,22 +404,34 @@ function drawContactIllustration(
   ctx.closePath();
   ctx.fill();
   ctx.restore();
-  ctx.restore();
-
+  ctx.fillStyle = card.accentColor;
+  ctx.globalAlpha = 0.55;
   ctx.save();
-  ctx.globalAlpha = 0.65;
-  drawSprig(ctx, cx - 150, cy + 18, 0.42, card.accentColor, 1.2);
-  drawSprig(ctx, cx + 150, cy + 18, Math.PI - 0.42, card.accentColor, 1.2);
-  drawSprig(ctx, cx - 125, cy - 75, 0.2, card.accentColor, 0.85);
-  drawSprig(ctx, cx + 125, cy - 75, Math.PI - 0.2, card.accentColor, 0.85);
+  ctx.translate(cx + 110, cy - 90);
+  ctx.rotate(-0.6);
+  ctx.beginPath();
+  ctx.moveTo(0, -38);
+  ctx.bezierCurveTo(-12, -28, -14, -10, -8, 0);
+  ctx.bezierCurveTo(-4, 8, 4, 8, 8, 0);
+  ctx.bezierCurveTo(14, -10, 12, -28, 0, -38);
+  ctx.fill();
+  ctx.fillStyle = catppuccin.surface0;
+  ctx.globalAlpha = 0.6;
+  ctx.beginPath();
+  ctx.moveTo(0, -38);
+  ctx.lineTo(0, 8);
+  ctx.bezierCurveTo(6, 2, 10, -6, 8, 0);
+  ctx.fill();
+  ctx.fillStyle = catppuccin.surface1;
+  ctx.globalAlpha = 0.8;
+  ctx.beginPath();
+  ctx.moveTo(0, 8);
+  ctx.lineTo(3, 22);
+  ctx.lineTo(0, 20);
+  ctx.lineTo(-3, 22);
+  ctx.closePath();
+  ctx.fill();
   ctx.restore();
-
-  ctx.save();
-  ctx.globalAlpha = 0.85;
-  drawMushroom(ctx, cx - 105, cy + 148, 22, catppuccin.teal);
-  drawMushroom(ctx, cx - 88, cy + 142, 16, catppuccin.sky);
-  drawMushroom(ctx, cx + 105, cy + 148, 22, catppuccin.teal);
-  drawMushroom(ctx, cx + 88, cy + 142, 16, catppuccin.sky);
   ctx.restore();
 }
 
@@ -547,25 +526,29 @@ function drawExperiencesIllustration(
   ctx.restore();
 
   const cStars = [
-    { x: cx + 72, y: cy - 92 },
+    { x: cx + 72, y: cy - 110 },
+    { x: cx + 86, y: cy - 58 },
+    { x: cx + 96, y: cy - 2 },
+    { x: cx + 116, y: cy - 72 },
+    { x: cx + 38, y: cy - 82 },
     { x: cx - 68, y: cy - 96 },
-    { x: cx + 110, y: cy + 16 },
     { x: cx - 106, y: cy + 28 },
-    { x: cx + 58, y: cy + 110 },
     { x: cx - 52, y: cy + 114 },
+  ];
+  const cEdges: [number, number][] = [
+    [0, 1],
+    [1, 2],
+    [3, 1],
+    [1, 4],
   ];
   ctx.strokeStyle = `${card.accentColor}28`;
   ctx.lineWidth = 0.7;
-  ctx.beginPath();
-  cStars
-    .slice(0, 3)
-    .forEach((s, i) => (i === 0 ? ctx.moveTo(s.x, s.y) : ctx.lineTo(s.x, s.y)));
-  ctx.stroke();
-  ctx.beginPath();
-  cStars
-    .slice(3)
-    .forEach((s, i) => (i === 0 ? ctx.moveTo(s.x, s.y) : ctx.lineTo(s.x, s.y)));
-  ctx.stroke();
+  cEdges.forEach(([a, b]) => {
+    ctx.beginPath();
+    ctx.moveTo(cStars[a].x, cStars[a].y);
+    ctx.lineTo(cStars[b].x, cStars[b].y);
+    ctx.stroke();
+  });
   cStars.forEach((s) => {
     ctx.save();
     ctx.shadowColor = catppuccin.text;
@@ -580,7 +563,7 @@ function drawExperiencesIllustration(
   [
     { x: cx + 50, y: cy - 118 },
     { x: cx - 46, y: cy - 112 },
-    { x: cx + 90, y: cy - 58 },
+    { x: cx + 90, y: cy - 38 },
     { x: cx - 86, y: cy - 48 },
     { x: cx + 94, y: cy + 58 },
     { x: cx - 90, y: cy + 72 },
@@ -594,17 +577,10 @@ function drawExperiencesIllustration(
     ctx.globalAlpha = 1;
   });
 
-  ctx.save();
-  ctx.globalAlpha = 0.72;
-  drawCrystalCluster(ctx, cx - 128, cy - 44, card.accentColor, 0.68);
-  drawCrystalCluster(ctx, cx + 128, cy - 44, card.accentColor, 0.68);
-  ctx.restore();
-
-  ctx.save();
-  ctx.globalAlpha = 0.55;
-  drawSprig(ctx, cx + 142, cy + 20, Math.PI - 0.28, card.accentColor, 1.05);
-  drawSprig(ctx, cx - 142, cy + 20, 0.28, card.accentColor, 1.05);
-  ctx.restore();
+  drawLeafArc(ctx, cx, cy, 136, -2.85, -2.15, card.accentColor, 6, 10);
+  drawLeafArc(ctx, cx, cy, 136, -0.85, -0.15, card.accentColor, 6, 10);
+  drawLeafArc(ctx, cx, cy, 136, 2.35, 2.95, card.accentColor, 6, 10);
+  drawLeafArc(ctx, cx, cy, 136, 0.15, 0.75, card.accentColor, 6, 10);
 }
 
 function drawProjectsIllustration(
@@ -613,108 +589,218 @@ function drawProjectsIllustration(
   cy: number,
   card: CardDef,
 ) {
-  const drawHex = (hx: number, hy: number, r: number) => {
-    ctx.beginPath();
-    for (let i = 0; i < 6; i++) {
-      const a = (i * Math.PI) / 3 - Math.PI / 6;
-      const x = hx + r * Math.cos(a);
-      const y = hy + r * Math.sin(a);
-      if (i === 0) {
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
-      }
-    }
-    ctx.closePath();
-  };
+  drawOuterRing(ctx, cx, cy, card.accentColor, 132, 118);
+  drawConstellationDots(
+    ctx,
+    cx,
+    cy,
+    card.accentColor,
+    126,
+    12,
+    0.15,
+    0.08,
+    4,
+    2,
+  );
 
-  drawOuterRing(ctx, cx, cy, card.accentColor, 132);
-
+  const cauldronY = cy + 28;
   ctx.save();
   ctx.shadowColor = card.accentColor;
-  ctx.shadowBlur = 18;
+  ctx.shadowBlur = 20;
+  ctx.fillStyle = 'rgba(17, 17, 27, 0.92)';
+  ctx.beginPath();
+  ctx.moveTo(cx - 52, cauldronY - 38);
+  ctx.bezierCurveTo(
+    cx - 58,
+    cauldronY - 38,
+    cx - 62,
+    cauldronY - 30,
+    cx - 62,
+    cauldronY - 18,
+  );
+  ctx.bezierCurveTo(
+    cx - 62,
+    cauldronY + 18,
+    cx - 48,
+    cauldronY + 42,
+    cx,
+    cauldronY + 48,
+  );
+  ctx.bezierCurveTo(
+    cx + 48,
+    cauldronY + 42,
+    cx + 62,
+    cauldronY + 18,
+    cx + 62,
+    cauldronY - 18,
+  );
+  ctx.bezierCurveTo(
+    cx + 62,
+    cauldronY - 30,
+    cx + 58,
+    cauldronY - 38,
+    cx + 52,
+    cauldronY - 38,
+  );
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle = card.accentColor;
+  ctx.lineWidth = 2.2;
+  ctx.globalAlpha = 0.9;
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.save();
   ctx.strokeStyle = card.accentColor;
   ctx.lineWidth = 2.5;
-  ctx.globalAlpha = 0.92;
-  drawHex(cx, cy, 90);
+  ctx.globalAlpha = 0.95;
+  ctx.beginPath();
+  ctx.ellipse(cx, cauldronY - 38, 56, 8, 0, 0, Math.PI * 2);
   ctx.stroke();
+  ctx.fillStyle = 'rgba(17, 17, 27, 0.95)';
+  ctx.fill();
   ctx.restore();
 
-  ctx.strokeStyle = `${card.accentColor}66`;
-  ctx.lineWidth = 1.2;
+  ctx.save();
+  ctx.strokeStyle = card.accentColor;
+  ctx.lineWidth = 2;
   ctx.globalAlpha = 0.75;
-  drawHex(cx, cy, 62);
-  ctx.stroke();
+  [-28, 0, 28].forEach((dx) => {
+    ctx.beginPath();
+    ctx.moveTo(cx + dx, cauldronY + 42);
+    ctx.lineTo(cx + dx + (dx < 0 ? -6 : dx > 0 ? 6 : 0), cauldronY + 58);
+    ctx.stroke();
+  });
+  ctx.restore();
 
-  ctx.fillStyle = 'rgba(17, 17, 27, 0.9)';
-  ctx.globalAlpha = 0.9;
-  drawHex(cx, cy, 44);
-  ctx.fill();
+  ctx.save();
+  ctx.strokeStyle = card.accentColor;
+  ctx.lineWidth = 2;
+  ctx.globalAlpha = 0.7;
+  ctx.beginPath();
+  ctx.moveTo(cx - 56, cauldronY - 28);
+  ctx.bezierCurveTo(
+    cx - 78,
+    cauldronY - 32,
+    cx - 78,
+    cauldronY - 6,
+    cx - 60,
+    cauldronY - 4,
+  );
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(cx + 56, cauldronY - 28);
+  ctx.bezierCurveTo(
+    cx + 78,
+    cauldronY - 32,
+    cx + 78,
+    cauldronY - 6,
+    cx + 60,
+    cauldronY - 4,
+  );
+  ctx.stroke();
+  ctx.restore();
 
   ctx.save();
   ctx.shadowColor = card.accentColor;
-  ctx.shadowBlur = 22;
+  ctx.shadowBlur = 30;
   ctx.fillStyle = card.accentColor;
-  ctx.globalAlpha = 0.95;
-  ctx.font = 'bold 52px serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('⬡', cx, cy);
+  ctx.globalAlpha = 0.15;
+  ctx.beginPath();
+  ctx.ellipse(cx, cauldronY - 34, 48, 6, 0, 0, Math.PI * 2);
+  ctx.fill();
   ctx.restore();
 
-  const hexRing = [0, 60, 120, 180, 240, 300];
-  hexRing.forEach((deg, i) => {
-    const a = (deg * Math.PI) / 180;
-    const hx2 = cx + Math.cos(a) * 108;
-    const hy2 = cy + Math.sin(a) * 108;
+  const wisps = [
+    { dx: -18, startY: -48, amp: 12, h: 72, alpha: 0.4 },
+    { dx: 6, startY: -50, amp: -10, h: 82, alpha: 0.5 },
+    { dx: 22, startY: -46, amp: 14, h: 68, alpha: 0.35 },
+    { dx: -8, startY: -52, amp: -8, h: 90, alpha: 0.45 },
+  ];
+  wisps.forEach((w) => {
     ctx.save();
     ctx.strokeStyle = card.accentColor;
     ctx.lineWidth = 1.2;
-    ctx.globalAlpha = 0.45 + (i % 2) * 0.2;
-    drawHex(hx2, hy2, 20);
+    ctx.globalAlpha = w.alpha;
+    ctx.beginPath();
+    const sx = cx + w.dx;
+    const sy = cauldronY + w.startY;
+    ctx.moveTo(sx, sy);
+    for (let t = 0; t <= 1; t += 0.05) {
+      const x = sx + Math.sin(t * Math.PI * 2.5) * w.amp * t;
+      const y = sy - t * w.h;
+      ctx.lineTo(x, y);
+    }
     ctx.stroke();
     ctx.restore();
   });
 
-  [30, 90, 150, 210, 270, 330].forEach((deg, i) => {
-    const a = (deg * Math.PI) / 180;
-    const hx2 = cx + Math.cos(a) * 128;
-    const hy2 = cy + Math.sin(a) * 128;
+  const symbols = [
+    { s: '✦', x: cx - 28, y: cy - 56, sz: 14, a: 0.7 },
+    { s: '◇', x: cx + 22, y: cy - 68, sz: 12, a: 0.55 },
+    { s: '○', x: cx - 6, y: cy - 86, sz: 11, a: 0.6 },
+    { s: '✧', x: cx + 36, y: cy - 42, sz: 10, a: 0.45 },
+    { s: '△', x: cx - 38, y: cy - 38, sz: 10, a: 0.4 },
+    { s: '⬡', x: cx, y: cy - 108, sz: 16, a: 0.65 },
+  ];
+  symbols.forEach((sym) => {
+    ctx.save();
+    ctx.shadowColor = card.accentColor;
+    ctx.shadowBlur = 12;
+    ctx.fillStyle = card.accentColor;
+    ctx.globalAlpha = sym.a;
+    ctx.font = `${sym.sz}px serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(sym.s, sym.x, sym.y);
+    ctx.restore();
+  });
+
+  [
+    { dx: -18, dy: -32, r: 3 },
+    { dx: 12, dy: -28, r: 2.5 },
+    { dx: -6, dy: -35, r: 4 },
+    { dx: 24, dy: -33, r: 2 },
+    { dx: -30, dy: -30, r: 2 },
+  ].forEach((b) => {
     ctx.save();
     ctx.strokeStyle = card.accentColor;
-    ctx.lineWidth = 0.9;
-    ctx.globalAlpha = 0.25 + (i % 3) * 0.1;
-    drawHex(hx2, hy2, 11);
+    ctx.lineWidth = 0.8;
+    ctx.globalAlpha = 0.5;
+    ctx.beginPath();
+    ctx.arc(cx + b.dx, cauldronY + b.dy, b.r, 0, Math.PI * 2);
     ctx.stroke();
+    ctx.fillStyle = card.accentColor;
+    ctx.globalAlpha = 0.12;
+    ctx.fill();
     ctx.restore();
   });
 
-  ctx.save();
-  ctx.strokeStyle = `${card.accentColor}22`;
-  ctx.lineWidth = 0.8;
-  ctx.globalAlpha = 0.6;
-  for (let gx = cx - 160; gx <= cx + 160; gx += 32) {
-    ctx.beginPath();
-    ctx.moveTo(gx, cy - 140);
-    ctx.lineTo(gx, cy + 140);
-    ctx.stroke();
-  }
-  for (let gy = cy - 140; gy <= cy + 140; gy += 32) {
-    ctx.beginPath();
-    ctx.moveTo(cx - 160, gy);
-    ctx.lineTo(cx + 160, gy);
-    ctx.stroke();
-  }
-  ctx.restore();
-
   const cStars = [
-    { x: cx + 70, y: cy - 100 },
     { x: cx - 68, y: cy - 94 },
-    { x: cx + 112, y: cy + 14 },
-    { x: cx - 108, y: cy + 22 },
-    { x: cx + 60, y: cy + 108 },
+    { x: cx - 95, y: cy - 55 },
+    { x: cx - 75, y: cy - 18 },
+    { x: cx + 75, y: cy - 16 },
+    { x: cx + 95, y: cy - 52 },
+    { x: cx + 70, y: cy - 92 },
     { x: cx - 54, y: cy + 112 },
+    { x: cx + 60, y: cy + 108 },
   ];
+  const cEdges: [number, number][] = [
+    [0, 1],
+    [1, 2],
+    [2, 3],
+    [3, 4],
+    [4, 5],
+  ];
+  ctx.strokeStyle = `${card.accentColor}28`;
+  ctx.lineWidth = 0.7;
+  cEdges.forEach(([a, b]) => {
+    ctx.beginPath();
+    ctx.moveTo(cStars[a].x, cStars[a].y);
+    ctx.lineTo(cStars[b].x, cStars[b].y);
+    ctx.stroke();
+  });
   cStars.forEach((s) => {
     ctx.save();
     ctx.shadowColor = catppuccin.text;
@@ -727,16 +813,15 @@ function drawProjectsIllustration(
     ctx.restore();
   });
 
-  ctx.save();
-  ctx.globalAlpha = 0.58;
-  drawCrystalCluster(ctx, cx - 130, cy - 46, card.accentColor, 0.65);
-  drawCrystalCluster(ctx, cx + 130, cy - 46, card.accentColor, 0.65);
-  ctx.restore();
+  drawLeafArc(ctx, cx, cy, 136, 2.35, 2.95, card.accentColor, 6, 10);
+  drawLeafArc(ctx, cx, cy, 136, 0.15, 0.75, card.accentColor, 6, 10);
 
   ctx.save();
-  ctx.globalAlpha = 0.52;
-  drawSprig(ctx, cx + 142, cy + 18, Math.PI - 0.28, card.accentColor, 1.0);
-  drawSprig(ctx, cx - 142, cy + 18, 0.28, card.accentColor, 1.0);
+  ctx.globalAlpha = 0.85;
+  drawMushroom(ctx, cx - 105, cy + 148, 22, catppuccin.pink);
+  drawMushroom(ctx, cx - 88, cy + 142, 16, catppuccin.maroon);
+  drawMushroom(ctx, cx + 105, cy + 148, 22, catppuccin.pink);
+  drawMushroom(ctx, cx + 88, cy + 142, 16, catppuccin.maroon);
   ctx.restore();
 }
 
@@ -842,17 +927,6 @@ export function createFrontTexture(card: CardDef): THREE.CanvasTexture {
   ctx.font = '14px serif';
   ctx.textAlign = 'center';
   ctx.fillText('◆', W / 2, 102);
-
-  ctx.save();
-  ctx.shadowColor = card.accentColor;
-  ctx.shadowBlur = 65;
-  ctx.fillStyle = card.accentColor;
-  ctx.globalAlpha = 0.08;
-  ctx.font = 'bold 240px serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(card.symbol, W / 2, H * 0.375);
-  ctx.restore();
 
   drawCardIllustration(ctx, W, H, card);
 

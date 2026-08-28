@@ -231,6 +231,100 @@ export function drawCrystalCluster(
   ctx.restore();
 }
 
+export function drawLeafArc(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  radius: number,
+  startAngle: number,
+  endAngle: number,
+  color: string,
+  count = 6,
+  leafSize = 11,
+) {
+  ctx.save();
+  ctx.fillStyle = color;
+  for (let i = 0; i < count; i++) {
+    const t = count === 1 ? 0.5 : i / (count - 1);
+    const angle = startAngle + t * (endAngle - startAngle);
+    const x = cx + Math.cos(angle) * radius;
+    const y = cy + Math.sin(angle) * radius;
+    const sz = leafSize * (0.75 + (i % 2) * 0.25);
+    ctx.save();
+    ctx.globalAlpha = 0.52 + Math.sin(i * 1.8) * 0.15;
+    ctx.translate(x, y);
+    ctx.rotate(angle + Math.PI / 2 + (i % 2 === 0 ? 0.45 : -0.45));
+    drawLeafShape(ctx, sz);
+    ctx.restore();
+    if (i % 3 === 1) {
+      const bx = cx + Math.cos(angle) * (radius + 4);
+      const by = cy + Math.sin(angle) * (radius + 4);
+      ctx.save();
+      ctx.globalAlpha = 0.4;
+      ctx.beginPath();
+      ctx.arc(bx, by, 2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+  ctx.restore();
+}
+
+export function drawVial(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  color: string,
+  sz = 1,
+) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.2 * sz;
+  ctx.globalAlpha = 0.85;
+  ctx.beginPath();
+  ctx.moveTo(-8 * sz, -12 * sz);
+  ctx.bezierCurveTo(-10 * sz, -8 * sz, -10 * sz, 16 * sz, -6 * sz, 22 * sz);
+  ctx.bezierCurveTo(-3 * sz, 26 * sz, 3 * sz, 26 * sz, 6 * sz, 22 * sz);
+  ctx.bezierCurveTo(10 * sz, 16 * sz, 10 * sz, -8 * sz, 8 * sz, -12 * sz);
+  ctx.closePath();
+  ctx.stroke();
+  ctx.fillStyle = color;
+  ctx.globalAlpha = 0.2;
+  ctx.beginPath();
+  ctx.moveTo(-9 * sz, 4 * sz);
+  ctx.bezierCurveTo(-10 * sz, 16 * sz, -6 * sz, 22 * sz, -6 * sz, 22 * sz);
+  ctx.bezierCurveTo(-3 * sz, 26 * sz, 3 * sz, 26 * sz, 6 * sz, 22 * sz);
+  ctx.bezierCurveTo(6 * sz, 22 * sz, 10 * sz, 16 * sz, 9 * sz, 4 * sz);
+  ctx.closePath();
+  ctx.fill();
+  ctx.globalAlpha = 0.85;
+  ctx.beginPath();
+  ctx.moveTo(-5 * sz, -12 * sz);
+  ctx.lineTo(-5 * sz, -22 * sz);
+  ctx.lineTo(5 * sz, -22 * sz);
+  ctx.lineTo(5 * sz, -12 * sz);
+  ctx.stroke();
+  ctx.fillStyle = catppuccin.rosewater;
+  ctx.globalAlpha = 0.7;
+  ctx.beginPath();
+  ctx.moveTo(-5 * sz, -22 * sz);
+  ctx.lineTo(-4 * sz, -28 * sz);
+  ctx.lineTo(4 * sz, -28 * sz);
+  ctx.lineTo(5 * sz, -22 * sz);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+  ctx.lineWidth = 0.8 * sz;
+  ctx.globalAlpha = 0.5;
+  ctx.beginPath();
+  ctx.moveTo(-6 * sz, -6 * sz);
+  ctx.lineTo(-6 * sz, 8 * sz);
+  ctx.stroke();
+
+  ctx.restore();
+}
+
 export function drawSpiderWeb(
   ctx: CanvasRenderingContext2D,
   cx: number,
